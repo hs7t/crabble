@@ -1,7 +1,7 @@
 <script>
-  import WordBlock from "./components/WordBlock.svelte";
+    import WordBlock from "./components/WordBlock.svelte";
 
-    let words = ["meow"]
+    let words = ["meow", "woo", "hoo"]
 </script>
 
 <div class="main-container">
@@ -13,5 +13,8 @@
 <style>
     .main-container {
         width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 1ch;
     }
 </style>
