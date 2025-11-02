@@ -2,16 +2,9 @@
     import { onMount } from "svelte";
     import { appEvents } from "../../shared.svelte";
 
-    let { word, onActivate = undefined, element = $bindable(undefined) } = $props()
+    let { word, element = $bindable(undefined) } = $props()
 
     onMount(() => {
-        element.addEventListener("keydown", (event: KeyboardEvent) => {
-            if (event.code == "Enter" && onActivate != undefined) {
-                onActivate()
-                element.focus()
-            }
-        })
-
         element.addEventListener("keyup", (event: KeyboardEvent) => {
             if (event.code == "KeyQ" || event.code == "KeyW" || event.code == "Enter") {
                 event.preventDefault()

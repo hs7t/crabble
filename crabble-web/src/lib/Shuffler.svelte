@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { swap, appEvents } from "../shared.svelte";
+    import { appEvents } from "../shared.svelte";
     import type { Word } from "../shared.svelte";
     import WordBlock from "./components/WordBlock.svelte";
     import { dndzone } from 'svelte-dnd-action'
@@ -39,19 +39,12 @@
 		words = e.detail.items;
 	}
 
-    function handleBlockInteract(word: Word) {
-        let indexInArray = words.findIndex(w => w.id === word.id)
-        words = swap(words, indexInArray, ((indexInArray + 1) % words.length))
-    }
 </script>
 
 <div use:dndzone="{{items: words}}" on:consider={handleSort} on:finalize={handleSort} class="main-container" bind:this={element}>
     {#each words as word(word.id)} 
     <WordBlock 
         word={word.title} 
-        onActivate={() => {
-            handleBlockInteract(word)
-        }}
     />
     {/each}
 </div>
