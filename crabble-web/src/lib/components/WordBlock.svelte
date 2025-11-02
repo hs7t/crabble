@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+    import { onMount } from "svelte";
+    import { appEvents } from "../../shared.svelte";
 
     let { word, onActivate = undefined, element = $bindable(undefined) } = $props()
 
@@ -7,7 +8,22 @@
         element.addEventListener("keydown", (event: KeyboardEvent) => {
             if (event.key == "Enter" && onActivate != undefined) {
                 onActivate()
+                element.focus()
             }
+        })
+
+        element.addEventListener("keyup", (event: KeyboardEvent) => {
+            if (event.key == "ArrowRight" || event.key == "ArrowLeft" || event.key == "Enter") {
+                event.preventDefault()
+            }
+            appEvents.dispatchEvent(
+                new CustomEvent("wordBlockKeyUp", {
+                    detail: {
+                        receivedEvent: event,
+                        word: word,
+                    }
+                })
+            )
         })
     })
 </script>
