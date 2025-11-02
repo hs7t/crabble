@@ -1,3 +1,6 @@
+class AppEvents extends EventTarget {}
+export const appEvents = new AppEvents();
+
 export const swap = (array: Array<any>, indexA: number, indexB: number) => {
   let result = array;
 
