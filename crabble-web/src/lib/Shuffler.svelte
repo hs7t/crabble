@@ -1,14 +1,17 @@
+<script>
+  import WordBlock from "./components/WordBlock.svelte";
+
+    let words = ["meow"]
+</script>
+
 <div class="main-container">
-    <div class="word">
-        test
-    </div>
+    {#each words as word} 
+    <WordBlock {word} />
+    {/each}
 </div>
 
 <style>
     .main-container {
         width: 100%;
-    }
-    .main-container .word {
-        padding: 1ch;
     }
 </style>
