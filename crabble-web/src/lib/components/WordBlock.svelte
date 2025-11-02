@@ -6,14 +6,14 @@
 
     onMount(() => {
         element.addEventListener("keydown", (event: KeyboardEvent) => {
-            if (event.key == "Enter" && onActivate != undefined) {
+            if (event.code == "Enter" && onActivate != undefined) {
                 onActivate()
                 element.focus()
             }
         })
 
         element.addEventListener("keyup", (event: KeyboardEvent) => {
-            if (event.key == "ArrowRight" || event.key == "ArrowLeft" || event.key == "Enter") {
+            if (event.code == "KeyQ" || event.code == "KeyW" || event.code == "Enter") {
                 event.preventDefault()
             }
             appEvents.dispatchEvent(
