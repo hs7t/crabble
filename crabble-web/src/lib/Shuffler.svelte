@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { swap, appEvents } from "../shared.svelte";
+    import type { Word } from "../shared.svelte";
     import WordBlock from "./components/WordBlock.svelte";
     import { dndzone } from 'svelte-dnd-action'
 
@@ -31,11 +32,6 @@
             }
         }, true)
     })
-
-    type Word = {
-        id: number
-        title: string
-    }
 
     let words: Array<Word> = [{id: 1, title: "meow"}, {id: 2, title: "woo"}, {id: 3, title: "hoo"}]
 
