@@ -15,9 +15,33 @@ export let gameState = $state({
   currentSolution: [] as Array<Word>,
 });
 
+const isWon = (game: typeof gameState) => {
+  return JSON.stringify(game.currentSolution) === JSON.stringify(game.puzzle);
+};
+
+export type gameStatus = "lost" | "won" | "playing";
+
+export const getOverStatus = (game: typeof gameState) => {
+  let status = "playing" as gameStatus;
+  if (isWon(game)) {
+    status = "won";
+  } else {
+    status = "playing";
+  }
+
+  console.log(status);
+  return status;
+};
+
 export const shuffle = (array: Array<any>) => {
-  array.sort(() => Math.random() - 0.5);
-  return array;
+  let result = [...array];
+  result.sort(() => Math.random() - 0.5);
+
+  if (JSON.stringify(result) == JSON.stringify(array)) {
+    result = shuffle(array);
+  }
+
+  return result;
 };
 
 gameState.currentSolution = shuffle(gameState.puzzle);
