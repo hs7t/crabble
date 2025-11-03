@@ -10,9 +10,7 @@
     <Shuffler></Shuffler>
 </main>
 
-{#if currentGameStatus == 'won' || 'lost'}
-  <GameOver status={currentGameStatus} />
-{/if}
+<GameOver status={currentGameStatus} />
 
 <style>
   :global(body) {
