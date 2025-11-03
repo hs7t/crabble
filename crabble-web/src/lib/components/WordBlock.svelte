@@ -1,27 +1,8 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import { appEvents } from "../../shared.svelte";
-
-    let { word, element = $bindable(undefined) } = $props()
-
-    onMount(() => {
-        element.addEventListener("keyup", (event: KeyboardEvent) => {
-            if (event.code == "KeyQ" || event.code == "KeyW" || event.code == "Enter") {
-                event.preventDefault()
-            }
-            appEvents.dispatchEvent(
-                new CustomEvent("wordBlockKeyUp", {
-                    detail: {
-                        receivedEvent: event,
-                        word: word,
-                    }
-                })
-            )
-        })
-    })
+    let { word, element = $bindable(undefined), ...rest } = $props()
 </script>
 
-<div class="word" bind:this={element}>
+<div class="word" bind:this={element} {...rest}>
     {word}
 </div>
 
@@ -36,5 +17,11 @@
         background-color: var(--background-color);
         color: var(--color);
         font-weight: 600;
+        transition: all 100ms;
+    }
+
+    .word:active {
+        outline: unset;
+        transform: rotate(-7deg);
     }
 </style>
