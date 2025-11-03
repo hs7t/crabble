@@ -35,5 +35,6 @@
         border-radius: 8pt;
         background-color: var(--background-color);
         color: var(--color);
+        font-weight: 600;
     }
 </style>
