@@ -28,6 +28,8 @@ export const getOverStatus = (game: typeof gameState) => {
   } else {
     status = "playing";
   }
+
+  return status;
 };
 
 export const shuffle = (array: Array<any>) => {
