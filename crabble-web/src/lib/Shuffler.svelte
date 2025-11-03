@@ -69,7 +69,8 @@
         transition: all 100ms;
     }
 
-    .wordContainer:focus {
-        outline: none;
+    .wordContainer:focus, .wordContainer:active {
+        outline: var(--c-border-attention);
+        outline-offset: 3pt;
     }
 </style>

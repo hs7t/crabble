@@ -21,7 +21,7 @@
     }
 
     .word:active {
-        outline: none;
+        outline: unset;
         transform: rotate(-7deg);
     }
 </style>
