@@ -16,7 +16,7 @@ export let gameState = $state({
 });
 
 const isWon = (game: typeof gameState) => {
-  return game.currentSolution === game.puzzle;
+  return JSON.stringify(game.currentSolution) === JSON.stringify(game.puzzle);
 };
 
 export type gameStatus = "lost" | "won" | "playing";
@@ -29,6 +29,7 @@ export const getOverStatus = (game: typeof gameState) => {
     status = "playing";
   }
 
+  console.log(status);
   return status;
 };
 
