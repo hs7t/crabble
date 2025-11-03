@@ -1,8 +1,9 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { appEvents, gameState } from "../shared.svelte";
+    import { gameState } from "../shared.svelte";
     import WordBlock from "./components/WordBlock.svelte";
     import { dndzone } from 'svelte-dnd-action'
+  import { flip } from "svelte/animate";
 
     let element: HTMLElement|undefined = undefined;
 
@@ -11,25 +12,25 @@
             let isFocusedInside = element?.contains(document.activeElement)
             if (!isFocusedInside) {
                 if (event.code == "KeyQ") {
-                    const firstChild = element?.querySelector('.word') as HTMLElement
+                    const firstChild = element?.querySelector('.wordContainer') as HTMLElement
                     firstChild?.focus()
                 }
                 if (event.code == "KeyW") {
-                    const children = element?.querySelectorAll('.word')
+                    const children = element?.querySelectorAll('.wordContainer')
                     const lastChild = children?.[children.length - 1] as HTMLElement
                     lastChild?.focus()
                 }
             }
         })
 
-        appEvents.addEventListener('wordBlockKeyUp', (event: any) => {
-            if (event.detail.receivedEvent.code == "KeyW") {
-                ((event.detail.receivedEvent.target as HTMLElement)?.nextElementSibling as HTMLElement)?.focus()
+        element?.addEventListener('keyup', (event) => {
+            if (event.code == "KeyW") {
+                ((event.target as HTMLElement)?.nextElementSibling as HTMLElement)?.focus()
             }
-            if (event.detail.receivedEvent.code == "KeyQ") {
-                ((event.detail.receivedEvent.target as HTMLElement)?.previousElementSibling as HTMLElement)?.focus()
+            if (event.code == "KeyQ") {
+                ((event.target as HTMLElement)?.previousElementSibling as HTMLElement)?.focus()
             }
-        }, true)
+        })
     })
 
 	function handleSort(e: any) {
@@ -37,11 +38,19 @@
 	}
 </script>
 
-<div use:dndzone="{{items: gameState.currentSolution}}" on:consider={handleSort} on:finalize={handleSort} class="main-container" bind:this={element}>
-    {#each gameState.currentSolution as word(word.id)} 
-        <WordBlock 
-            word={word.title} 
-        />
+<div 
+    use:dndzone="{{items: gameState.currentSolution}}" 
+    on:consider={handleSort} 
+    on:finalize={handleSort} 
+    class="main-container" 
+    bind:this={element}
+>
+    {#each gameState.currentSolution as word(word.id)}
+        <span class="wordContainer" animate:flip={{duration: 100}}>
+            <WordBlock 
+                word={word.title} 
+            />
+        </span>
     {/each}
 </div>
 
@@ -56,5 +65,12 @@
         overflow-x: auto;
         border: var(--c-border-general);
         border-radius: 8pt;
+
+        transition: all 100ms;
+    }
+
+    .wordContainer:focus, .wordContainer:active {
+        outline: var(--c-border-attention);
+        outline-offset: 3pt;
     }
 </style>
