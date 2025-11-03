@@ -16,8 +16,14 @@ export let gameState = $state({
 });
 
 export const shuffle = (array: Array<any>) => {
-  array.sort(() => Math.random() - 0.5);
-  return array;
+  let result = [...array];
+  result.sort(() => Math.random() - 0.5);
+
+  if (JSON.stringify(result) == JSON.stringify(array)) {
+    result = shuffle(array);
+  }
+
+  return result;
 };
 
 gameState.currentSolution = shuffle(gameState.puzzle);
