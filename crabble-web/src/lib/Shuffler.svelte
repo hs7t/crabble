@@ -69,7 +69,7 @@
         transition: all 100ms;
     }
 
-    .wordContainer:active {
+    .wordContainer:focus {
         outline: none;
     }
 </style>
