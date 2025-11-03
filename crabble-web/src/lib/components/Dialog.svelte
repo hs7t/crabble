@@ -31,9 +31,9 @@
 
         color: inherit;
         font-size: inherit;
-        border: var(--i-border-primary);
-        border-radius: var(--i-radius-primary);
-        background-color: var(--i-color-overlay-background);
+        border: var(--c-border-general);
+        border-radius: var(--c-radius-primary);
+        background-color: var(--c-color-background-C);
 
         animation: 100ms dialogEnter;
         animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
