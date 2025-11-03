@@ -8,4 +8,11 @@
 </main>
 
 <style>
+  main {
+    display: flex;
+    flex-direction: column;
+
+    width: clamp(50dvw, 500px, 80dvw);
+    margin: auto;
+  }
 </style>
