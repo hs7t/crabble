@@ -68,4 +68,8 @@
 
         transition: all 100ms;
     }
+
+    .wordContainer:active {
+        outline: none;
+    }
 </style>
