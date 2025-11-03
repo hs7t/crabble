@@ -3,6 +3,7 @@
     import { gameState } from "../shared.svelte";
     import WordBlock from "./components/WordBlock.svelte";
     import { dndzone } from 'svelte-dnd-action'
+  import { flip } from "svelte/animate";
 
     let element: HTMLElement|undefined = undefined;
 
@@ -45,7 +46,7 @@
     bind:this={element}
 >
     {#each gameState.currentSolution as word(word.id)}
-        <span class="wordContainer">
+        <span class="wordContainer" animate:flip={{duration: 100}}>
             <WordBlock 
                 word={word.title} 
             />
