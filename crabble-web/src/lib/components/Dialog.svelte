@@ -82,11 +82,6 @@
         align-self: flex-end;
     }
 
-    ul {
-        max-width: 100%;
-        list-style-type: circle;
-    }
-
     dialog:not([open]) {
         display: none;
         transition: all;
