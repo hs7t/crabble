@@ -15,8 +15,19 @@ export let gameState = $state({
   currentSolution: [] as Array<Word>,
 });
 
-export const isWon = (game: typeof gameState) => {
+const isWon = (game: typeof gameState) => {
   return game.currentSolution === game.puzzle;
+};
+
+type gameStatus = "lost" | "won" | "playing";
+
+export const getOverStatus = (game: typeof gameState) => {
+  let status = "playing" as gameStatus;
+  if (isWon(game)) {
+    status = "won";
+  } else {
+    status = "playing";
+  }
 };
 
 export const shuffle = (array: Array<any>) => {
