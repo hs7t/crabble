@@ -15,4 +15,6 @@
     --c-color-main-secondary: #8D8D8D;
 
     --c-border-general: dotted 1.2pt var(--c-color-main-secondary);
+
+    --c-font-primary: Inter, system-ui, sans-serif;
 }
