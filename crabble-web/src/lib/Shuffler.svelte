@@ -51,6 +51,7 @@
         flex-direction: row;
         width: 100%;
         gap: 1ch;
+        padding: 1ch;
 
         overflow-y: scroll;
         border: var(--c-border-general);
