@@ -37,8 +37,14 @@
 	}
 </script>
 
-<div use:dndzone="{{items: gameState.currentSolution}}" on:consider={handleSort} on:finalize={handleSort} class="main-container" bind:this={element}>
-    {#each gameState.currentSolution as word(word.id)} 
+<div 
+    use:dndzone="{{items: gameState.currentSolution}}" 
+    on:consider={handleSort} 
+    on:finalize={handleSort} 
+    class="main-container" 
+    bind:this={element}
+>
+    {#each gameState.currentSolution as word(word.id)}
         <WordBlock 
             word={word.title} 
         />
@@ -56,5 +62,7 @@
         overflow-x: auto;
         border: var(--c-border-general);
         border-radius: 8pt;
+
+        transition: all 100ms;
     }
 </style>

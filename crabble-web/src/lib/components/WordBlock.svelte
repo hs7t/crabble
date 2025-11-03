@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { appEvents } from "../../shared.svelte";
 
-    let { word, element = $bindable(undefined) } = $props()
+    let { word, element = $bindable(undefined), ...rest } = $props()
 
     onMount(() => {
         element.addEventListener("keyup", (event: KeyboardEvent) => {
@@ -21,7 +21,7 @@
     })
 </script>
 
-<div class="word" bind:this={element}>
+<div class="word" bind:this={element} {...rest}>
     {word}
 </div>
 
