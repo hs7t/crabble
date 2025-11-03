@@ -15,7 +15,7 @@
         background-color: var(--c-color-background-B);
         color: var(--c-color-primary);
         border: var(--c-border-generic);
-        font-family: var(--c-font-family-primary);
+        font-family: var(--c-font-primary);
         transition: all 100ms;
         cursor: pointer;
     }
