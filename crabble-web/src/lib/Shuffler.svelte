@@ -40,9 +40,9 @@
 
 <div use:dndzone="{{items: gameState.currentSolution}}" on:consider={handleSort} on:finalize={handleSort} class="main-container" bind:this={element}>
     {#each gameState.currentSolution as word(word.id)} 
-    <WordBlock 
-        word={word.title} 
-    />
+        <WordBlock 
+            word={word.title} 
+        />
     {/each}
 </div>
 

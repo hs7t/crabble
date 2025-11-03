@@ -6,7 +6,6 @@ export type Word = {
   title: string;
 };
 
-
 export let gameState = $state({
   puzzle: [
     { id: 1, title: "meow" },
