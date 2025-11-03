@@ -19,7 +19,7 @@ const isWon = (game: typeof gameState) => {
   return game.currentSolution === game.puzzle;
 };
 
-type gameStatus = "lost" | "won" | "playing";
+export type gameStatus = "lost" | "won" | "playing";
 
 export const getOverStatus = (game: typeof gameState) => {
   let status = "playing" as gameStatus;
