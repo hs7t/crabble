@@ -53,7 +53,7 @@
         gap: 1ch;
         padding: 1ch;
 
-        overflow-y: scroll;
+        overflow-x: auto;
         border: var(--c-border-general);
         border-radius: 8pt;
     }
