@@ -35,7 +35,6 @@
 	function handleSort(e: any) {
 		gameState.currentSolution = e.detail.items;
 	}
-
 </script>
 
 <div use:dndzone="{{items: gameState.currentSolution}}" on:consider={handleSort} on:finalize={handleSort} class="main-container" bind:this={element}>
@@ -48,10 +47,14 @@
 
 <style>
     .main-container {
-        width: 100%;
         display: flex;
         flex-direction: row;
+        width: 100%;
         gap: 1ch;
-        overflow-y: scroll;
+        padding: 1ch;
+
+        overflow-x: auto;
+        border: var(--c-border-general);
+        border-radius: 8pt;
     }
 </style>
