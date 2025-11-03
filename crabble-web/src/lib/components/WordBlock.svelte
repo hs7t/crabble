@@ -27,6 +27,14 @@
 
 <style>
     .word {
+        --background-color: var(--c-color-accent-A);
+        --color: var(--c-color-accent-A-contrast);
+
         padding: 1ch;
+
+        border-radius: 8pt;
+        background-color: var(--background-color);
+        color: var(--color);
+        font-weight: 600;
     }
 </style>
