@@ -15,6 +15,10 @@ export let gameState = $state({
   currentSolution: [] as Array<Word>,
 });
 
+export const isWon = (game: typeof gameState) => {
+  return game.currentSolution === game.puzzle;
+};
+
 export const shuffle = (array: Array<any>) => {
   let result = [...array];
   result.sort(() => Math.random() - 0.5);
