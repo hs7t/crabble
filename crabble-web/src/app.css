@@ -13,4 +13,6 @@
 
     --c-color-main-primary: #575757;
     --c-color-main-secondary: #8D8D8D;
+
+    --c-border-general: dotted 1.2pt var(--c-color-main-secondary);
 }
