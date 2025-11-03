@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { appEvents } from "../shared.svelte";
-    import type { Word } from "../shared.svelte";
+    import { appEvents, gameState } from "../shared.svelte";
     import WordBlock from "./components/WordBlock.svelte";
     import { dndzone } from 'svelte-dnd-action'
 
@@ -33,16 +32,14 @@
         }, true)
     })
 
-    let words: Array<Word> = [{id: 1, title: "meow"}, {id: 2, title: "woo"}, {id: 3, title: "hoo"}]
-
 	function handleSort(e: any) {
-		words = e.detail.items;
+		gameState.currentSolution = e.detail.items;
 	}
 
 </script>
 
-<div use:dndzone="{{items: words}}" on:consider={handleSort} on:finalize={handleSort} class="main-container" bind:this={element}>
-    {#each words as word(word.id)} 
+<div use:dndzone="{{items: gameState.currentSolution}}" on:consider={handleSort} on:finalize={handleSort} class="main-container" bind:this={element}>
+    {#each gameState.currentSolution as word(word.id)} 
     <WordBlock 
         word={word.title} 
     />
