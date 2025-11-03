@@ -36,5 +36,23 @@
         background-color: var(--background-color);
         color: var(--color);
         font-weight: 600;
+        animation: 140ms bounce;
+    }
+
+    @keyframes bounce {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.2);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .word:active {
+        outline: none;
+        transform: rotate(-7deg);
     }
 </style>
