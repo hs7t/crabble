@@ -6,6 +6,10 @@ export type Word = {
   title: string;
 };
 
+export type Milliseconds = number
+
+export const PUZZLE_TIME_QUANTITY = 15000 as Milliseconds; 
+
 export let gameState = $state({
   puzzle: [
     { id: 1, title: "meow" },
@@ -13,6 +17,8 @@ export let gameState = $state({
     { id: 3, title: "hoo" },
   ] as Array<Word>,
   currentSolution: [] as Array<Word>,
+  timeLeft: PUZZLE_TIME_QUANTITY,
+  maxTime: PUZZLE_TIME_QUANTITY,
 });
 
 const isWon = (game: typeof gameState) => {
@@ -26,7 +32,11 @@ export const getOverStatus = (game: typeof gameState) => {
   if (isWon(game)) {
     status = "won";
   } else {
-    status = "playing";
+    if (gameState.timeLeft == 0) {
+      status = "lost"
+    } else {
+      status = "playing";
+    }
   }
 
   console.log(status);
@@ -46,3 +56,8 @@ export const shuffle = (array: Array<any>) => {
 
 gameState.currentSolution = shuffle(gameState.puzzle);
 
+const timeLeftLoop =  setInterval(() => {
+  if (gameState.timeLeft > 0) {
+    gameState.timeLeft -= (1000 as Milliseconds);
+  }
+}, 1000);

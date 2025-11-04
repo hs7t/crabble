@@ -1,12 +1,15 @@
 <script lang="ts">
+  import ProgressBar from "./lib/components/ProgressBar.svelte";
   import GameOver from "./lib/GameOver.svelte";
   import Shuffler from "./lib/Shuffler.svelte";
 
-  import { gameState, getOverStatus } from "./shared.svelte";
+  import { gameState, getOverStatus, PUZZLE_TIME_QUANTITY } from "./shared.svelte";
   let currentGameStatus = $derived(getOverStatus(gameState))
 </script>
 
 <main>
+    <ProgressBar currentValue={gameState.timeLeft} maxValue={gameState.maxTime}></ProgressBar>
+    {gameState.timeLeft}
     <Shuffler></Shuffler>
 </main>
 

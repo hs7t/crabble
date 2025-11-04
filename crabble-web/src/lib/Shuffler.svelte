@@ -35,6 +35,7 @@
 
 	function handleSort(e: any) {
 		gameState.currentSolution = e.detail.items;
+        gameState.timeLeft = gameState.maxTime;
 	}
 </script>
 
@@ -58,7 +59,8 @@
     .main-container {
         display: flex;
         flex-direction: row;
-        width: 100%;
+        flex-grow: 1;
+        justify-content: center;
         gap: 1ch;
         padding: 1ch;
 
