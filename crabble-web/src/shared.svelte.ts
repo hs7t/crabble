@@ -31,7 +31,11 @@ export const getOverStatus = (game: typeof gameState) => {
   if (isWon(game)) {
     status = "won";
   } else {
-    status = "playing";
+    if (gameState.timeLeft == 0) {
+      status = "lost"
+    } else {
+      status = "playing";
+    }
   }
 
   console.log(status);
