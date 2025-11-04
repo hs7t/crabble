@@ -18,6 +18,7 @@ export let gameState = $state({
   ] as Array<Word>,
   currentSolution: [] as Array<Word>,
   timeLeft: PUZZLE_TIME_QUANTITY,
+  maxTime: PUZZLE_TIME_QUANTITY,
 });
 
 const isWon = (game: typeof gameState) => {

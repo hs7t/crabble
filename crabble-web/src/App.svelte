@@ -8,7 +8,7 @@
 </script>
 
 <main>
-    <ProgressBar currentValue={gameState.timeLeft} maxValue={PUZZLE_TIME_QUANTITY}></ProgressBar>
+    <ProgressBar currentValue={gameState.timeLeft} maxValue={gameState.maxTime}></ProgressBar>
     {gameState.timeLeft}
     <Shuffler></Shuffler>
 </main>
