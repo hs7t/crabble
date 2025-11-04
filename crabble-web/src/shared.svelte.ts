@@ -6,6 +6,8 @@ export type Word = {
   title: string;
 };
 
+export type Milliseconds = number
+
 export let gameState = $state({
   puzzle: [
     { id: 1, title: "meow" },
@@ -13,6 +15,7 @@ export let gameState = $state({
     { id: 3, title: "hoo" },
   ] as Array<Word>,
   currentSolution: [] as Array<Word>,
+  timeLeft: 15000 as Milliseconds
 });
 
 const isWon = (game: typeof gameState) => {
@@ -46,3 +49,11 @@ export const shuffle = (array: Array<any>) => {
 
 gameState.currentSolution = shuffle(gameState.puzzle);
 
+const loopTimeLeftUpdate = async () => {
+  await setTimeout(() => {
+    if (gameState.timeLeft > 0) gameState.timeLeft += -1
+  }, 1000);
+  loopTimeLeftUpdate()
+}
+
+loopTimeLeftUpdate()
