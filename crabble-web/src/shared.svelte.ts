@@ -49,11 +49,8 @@ export const shuffle = (array: Array<any>) => {
 
 gameState.currentSolution = shuffle(gameState.puzzle);
 
-const loopTimeLeftUpdate = async () => {
-  await setTimeout(() => {
-    if (gameState.timeLeft > 0) gameState.timeLeft += -1
-  }, 1000);
-  loopTimeLeftUpdate()
-}
-
-loopTimeLeftUpdate()
+const timeLeftLoop =  setInterval(() => {
+  if (gameState.timeLeft > 0) {
+    gameState.timeLeft -= (1000 as Milliseconds);
+  }
+}, 1000);
