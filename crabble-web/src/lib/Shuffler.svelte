@@ -35,6 +35,7 @@
 
 	function handleSort(e: any) {
 		gameState.currentSolution = e.detail.items;
+        gameState.timeLeft = gameState.maxTime;
 	}
 </script>
 
