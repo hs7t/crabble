@@ -8,6 +8,8 @@ export type Word = {
 
 export type Milliseconds = number
 
+export const PUZZLE_TIME_QUANTITY = 15000 as Milliseconds; 
+
 export let gameState = $state({
   puzzle: [
     { id: 1, title: "meow" },
@@ -15,7 +17,7 @@ export let gameState = $state({
     { id: 3, title: "hoo" },
   ] as Array<Word>,
   currentSolution: [] as Array<Word>,
-  timeLeft: 15000 as Milliseconds
+  timeLeft: PUZZLE_TIME_QUANTITY,
 });
 
 const isWon = (game: typeof gameState) => {
