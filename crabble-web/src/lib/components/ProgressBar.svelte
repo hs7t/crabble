@@ -4,13 +4,15 @@
 </script>
 
 <div class="progress-bar" role="progressbar" aria-valuenow={percentageElapsed}>
-    <span class="progress" style="--current-percentage: {percentageElapsed}%;"></span>
+    <div class="progress" style="--current-percentage: {percentageElapsed}%;"></div>
 </div>
 
 <style>
     .progress-bar {
         width: 100%;
         height: 1rem;
+
+        background-color: var(--c-color-background-B);
     }
 
     .progress-bar .progress {
@@ -18,5 +20,6 @@
 
         width: var(--current-percentage);
         height: 100%;
+        background-color: var(--c-color-accent-A);
     }
 </style>
