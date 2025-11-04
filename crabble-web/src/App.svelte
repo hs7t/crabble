@@ -7,6 +7,7 @@
 </script>
 
 <main>
+    {gameState.timeLeft}
     <Shuffler></Shuffler>
 </main>
 
