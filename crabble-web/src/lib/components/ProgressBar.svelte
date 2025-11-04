@@ -1,6 +1,6 @@
 <script>
-    let { currentValue, total } = $props()
-    let percentageElapsed = $derived( (currentValue / total) * 100 )
+    let { currentValue, maxValue } = $props()
+    let percentageElapsed = $derived( (currentValue / maxValue) * 100 )
 </script>
 
 <div class="progress-bar" role="progressbar" aria-valuenow={percentageElapsed}>
@@ -12,7 +12,7 @@
         width: 100%;
         height: 1rem;
     }
-    
+
     .progress-bar .progress {
         --current-percentage: 100%;
 
