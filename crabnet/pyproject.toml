@@ -9,10 +9,7 @@ license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.13,<3.14"
 dependencies = [
-    "fastapi[standard] (>=0.116.1,<0.117.0)",
-    "spacy (>=3.8.7,<4.0.0)",
-    "en-core-web-md @ https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0.tar.gz",
-    "en-core-web-lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.8.0/en_core_web_lg-3.8.0.tar.gz"
+    "fastapi[standard] (>=0.121.0,<0.122.0)",
 ]
 
 [build-system]
