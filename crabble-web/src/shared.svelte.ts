@@ -29,6 +29,19 @@ const getWordTitles = (solution: Array<Word>) => {
   return titles
 }
 
+const createWordsFromTitles = (titles: Array<string>) => {
+  let workingId = 0
+  let words = [] as Array<Word>
+
+  for (let title of titles) {
+    words.push({
+      id: workingId,
+      title: title
+    } as Word)
+  }
+} 
+
+
 const isWon = (game: typeof gameState) => {
   let puzzleSolutionTitles = getWordTitles(game.currentSolution)
   let currentSolutionTitles = getWordTitles(game.puzzle)
