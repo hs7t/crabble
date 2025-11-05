@@ -1,39 +1,30 @@
 import json
-from fastapi import FastAPI, HTTPException
-from wordalize import checkSimilarity
-from timekeeping import dateFromYMD
+from utilitarianism import randomIndex
+from fastapi import FastAPI, APIRouter
+from typing import Literal
 
 app = FastAPI()
+v1_router = APIRouter(prefix="/api/v1", tags=["v1"])
 
 async def readPuzzles():
     with open('puzzles.json', 'r') as puzzlesJSON:
         puzzles = json.load(puzzlesJSON)
     return puzzles
 
-async def readLatestPuzzle():
+PuzzleKind = Literal["general", "spooky"]
+
+async def getRandomPuzzle(type: PuzzleKind) -> list:
     puzzles = await readPuzzles()
-    latestPuzzle = next(reversed(puzzles.values()))
 
-    return latestPuzzle
+    if type == "general":
+        return randomIndex(puzzles["general"])
+    elif type == "spooky":
+        return randomIndex(puzzles["occasional"]["spooky"])
 
-@app.get("/")
+@v1_router.get("/")
 async def main():
-    return "Hello!"
+    return "chop chop 🦀"
 
-@app.get("/v1/puzzles/latest")
+@v1_router.get("/puzzles/random")
 async def returnLatestPuzzle():
-    return await readLatestPuzzle()
-
-@app.get("/v1/similarity/{guess}")
-async def checkGuessCloseness(guess: str, solution: str|None = None): 
-    if solution == None:
-        solution = (await readLatestPuzzle())["word"]
-
-    return checkSimilarity(guess, solution)
-
-@app.get("/v1/puzzles/{time}")
-async def fetchPuzzle(time: str):
-    try:
-        return (await readPuzzles())[time]
-    except:
-        raise HTTPException(status_code=404, detail="Couldn't find puzzle")
+    return await getRandomPuzzle("general")

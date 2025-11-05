@@ -1,102 +1,75 @@
 {
-  "2025-09-08": {
-    "snippets": [
+  "general": [
+    {
+      "id": "cats",
+      "series": [
+        [
+          "where",
+          "was",
+          "the",
+          "cat",
+          "again"
+        ],
+        [
+          "Jolene",
+          "!",
+          "have",
+          "you",
+          "seen",
+          "the",
+          "cat"
+        ],
+        [
+          "oh",
+          "!",
+          "there",
+          "you",
+          "are"
+        ],
+        [
+          "Jolene",
+          ",",
+          "why",
+          "was",
+          "the",
+          "cat",
+          "in",
+          "the",
+          "pantry",
+          "?"
+        ]
+      ]
+    }
+  ],
+  "occasional": {
+    "spooky": [
       {
-        "text": "Just this {year}, a study found that living within a mile of a golf course more than doubles a person's odds of developing Parkinson's. One theory is that it is because golf courses use pesticides.",
-        "source": {
-          "publication": "The New York Times Opinion",
-          "author": "Nicholas Kristof"
-        }
+        "id": "bones",
+        "series": [
+          [
+            "take",
+            "the",
+            "bones",
+            "out",
+            "the",
+            "basement"
+          ],
+          [
+            "how",
+            "many",
+            "licks",
+            "to",
+            "get",
+            "to",
+            "the",
+            "bone",
+            "center",
+            "of",
+            "a",
+            "bone"
+          ]
+        ]
       }
-    ],
-    "word": "year"
-  },
-
-  "2025-09-11": {
-    "snippets": [
-      {
-        "text": "I'm known for my short {rehearsal} times: just six weeks. My last two weeks are famous among theater people because things move at a very high speed.",
-        "source": {
-          "publication": "The New York Times Style Magazine",
-          "author": "Joshua Barone"
-        },
-        "year": "2022"
-      },
-      {
-        "text": "Each loss is a reminder of the one that came before and a {rehearsal} for those yet to come.",
-        "source": {
-          "publication": "The New Republic",
-          "author": "Maggie Doherty"
-        },
-        "year": "2022"
-      },
-      {
-        "text": "The metaphors flowed freely in Janos Szasz's {rehearsal} room.",
-        "source": {
-          "publication": "Washington Post",
-          "author": "Peter Marks"
-        },
-        "year": "2023"
-      }
-    ],
-    "word": "rehearsal"
-  },
-  "2025-09-14": {
-    "snippets": [
-      {
-        "text": "Later on their minds would be made to endorse the judgment of their bodies. ‘We condition them to thrive on {heat},’ concluded Mr. Foster. ‘Our colleagues upstairs will teach them to love it.’",
-        "source": {
-          "publication": "Brave New World",
-          "author": "Aldous Huxley"
-        },
-        "year": "1932"
-      },
-      {
-        "text": "His approving answers reassured me, and I began by degrees to regain confidence, and the vital {heat} returned.",
-        "source": {
-          "publication": "Dialogues [Charmides]",
-          "author": "Plato"
-        },
-        "year": "~380 BCE"
-      },
-      {
-        "text": "Do not use the product if it is emitting smoke, odor, {heat}, or exhibiting any other abnormality. Do not use the product after it has been dropped or otherwise damaged.",
-        "source": {
-          "publication": "CT-S100 Safety Precautions",
-          "author": "CASIO"
-        },
-        "year": "2019"
-      }
-    ],
-    "word": "heat"
-  },
-  "2025-09-24": {
-    "snippets": [
-      {
-        "text": "I am there so often that the man who runs the recyclables aisle {know}s my name – and he is seriously unimpressed with my offerings.",
-        "source": {
-          "publication": "The Guardian",
-          "author": "Zoe Williams"
-        },
-        "year": "2025"
-      },
-      {
-        "text": "Maybe the act of taking an OLP—twisting off the bottle cap, swallowing the pill—triggers some biomedically useful pathways, just as bloodcurdling movies can curdle (or coagulate) the blood even though the viewer {know}s everything in the film is fake.",
-        "source": {
-          "publication": "WIRED",
-          "author": "Tom Vanderbilt"
-        },
-        "year": "2023"
-      },
-      {
-        "text": "Here’s a timeless dictum that aptly applies to election administration: Everything looks suspicious when you don’t know how anything works.",
-        "source": {
-          "publication": "MSNBC",
-          "author": "Edward Perez"
-        },
-        "year": "2024"
-      }
-    ],
-    "word": "know"
+    ]
   }
 }

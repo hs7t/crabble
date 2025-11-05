@@ -1,5 +1,5 @@
-# volume network
+# Crabble
 
-a backend for ~~Volumes~~ Crabble, a word game!!
+a backend for Crabble, a word game!!
 
-uses [FastAPI](https://fastapi.tiangolo.com/), [spaCy](https://spacy.io/), [Python](https://www.python.org/).
+uses [FastAPI](https://fastapi.tiangolo.com/) and [Python](https://www.python.org/).
