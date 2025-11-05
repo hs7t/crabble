@@ -26,5 +26,5 @@ async def main():
     return "chop chop 🦀"
 
 @v1_router.get("/puzzles/random")
-async def returnLatestPuzzle(currentPuzzle: str|None = None):
-    return await getRandomPuzzle("general", currentPuzzle)
+async def returnLatestPuzzle(kind: PuzzleKind = "general", currentPuzzle: str|None = None):
+    return await getRandomPuzzle(kind, currentPuzzle)
