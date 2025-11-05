@@ -1,0 +1,1 @@
+export const API_URL = "https://crab.interfaces.hvii.cc/v1"
