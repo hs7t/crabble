@@ -13,18 +13,18 @@ async def readPuzzles():
 
 PuzzleKind = Literal["general", "spooky"]
 
-async def getRandomPuzzle(type: PuzzleKind) -> list:
+async def getRandomPuzzle(type: PuzzleKind, currentPuzzle = None) -> list:
     puzzles = await readPuzzles()
 
     if type == "general":
-        return randomIndex(puzzles["general"])
+        return randomIndex(puzzles["general"], currentPuzzle)
     elif type == "spooky":
-        return randomIndex(puzzles["occasional"]["spooky"])
+        return randomIndex(puzzles["occasional"]["spooky"], currentPuzzle)
 
 @v1_router.get("/")
 async def main():
     return "chop chop 🦀"
 
 @v1_router.get("/puzzles/random")
-async def returnLatestPuzzle():
-    return await getRandomPuzzle("general")
+async def returnRandomPuzzle(kind: PuzzleKind = "general", currentPuzzle: str|None = None):
+    return await getRandomPuzzle(kind, currentPuzzle)
