@@ -21,8 +21,19 @@ export let gameState = $state({
   maxTime: PUZZLE_TIME_QUANTITY,
 });
 
+const getWordTitles = (solution: Array<Word>) => {
+  let titles = []
+  for (let word of solution) {
+    titles.push(word.title)
+  }
+  return titles
+}
+
 const isWon = (game: typeof gameState) => {
-  return JSON.stringify(game.currentSolution) === JSON.stringify(game.puzzle);
+  let puzzleSolutionTitles = getWordTitles(game.currentSolution)
+  let currentSolutionTitles = getWordTitles(game.puzzle)
+
+  return JSON.stringify(puzzleSolutionTitles) === JSON.stringify(currentSolutionTitles);
 };
 
 export type gameStatus = "lost" | "won" | "playing";
