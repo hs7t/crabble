@@ -1,6 +1,6 @@
 import json
-import random
-from fastapi import FastAPI, HTTPException
+from utilitarianism import randomIndex
+from fastapi import FastAPI
 from typing import Literal
 
 app = FastAPI()
@@ -9,9 +9,6 @@ async def readPuzzles():
     with open('puzzles.json', 'r') as puzzlesJSON:
         puzzles = json.load(puzzlesJSON)
     return puzzles
-
-def randomIndex(lst: list) -> list:
-    return lst[random.randint(0, ( len(lst) - 1 ))]
 
 PuzzleKind = Literal["general", "spooky"]
 
