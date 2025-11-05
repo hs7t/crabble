@@ -1,7 +1,7 @@
 [project]
-name = "volumenetwork"
+name = "crabnet"
 version = "0.1.0"
-description = "An API for use in the word game Volumes"
+description = "An API for use in the word game Crabble"
 authors = [
     {name = "Alí Sinisterra",email = "haidarconh@gmail.com"}
 ]
