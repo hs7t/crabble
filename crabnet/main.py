@@ -1,9 +1,10 @@
 import json
 from utilitarianism import randomIndex
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
 from typing import Literal
 
 app = FastAPI()
+v1_router = APIRouter(prefix="/api/v1", tags=["v1"])
 
 async def readPuzzles():
     with open('puzzles.json', 'r') as puzzlesJSON:
@@ -20,10 +21,10 @@ async def getRandomPuzzle(type: PuzzleKind) -> list:
     elif type == "spooky":
         return randomIndex(puzzles["occasional"]["spooky"])
 
-@app.get("/")
+@v1_router.get("/")
 async def main():
-    return "Hello!"
+    return "chop chop 🦀"
 
-@app.get("/v1/puzzles/random")
+@v1_router.get("/puzzles/random")
 async def returnLatestPuzzle():
     return await getRandomPuzzle("general")
