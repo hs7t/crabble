@@ -30,10 +30,3 @@ async def main():
 @app.get("/v1/puzzles/random")
 async def returnLatestPuzzle():
     return await getRandomPuzzle("general")
-
-@app.get("/v1/puzzles/{time}")
-async def fetchPuzzle(time: str):
-    try:
-        return (await readPuzzles())[time]
-    except:
-        raise HTTPException(status_code=404, detail="Couldn't find puzzle")
