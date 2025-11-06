@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { gameState } from "../shared.svelte";
+    import { appEvents, checkPuzzleSolutionValidity, gameState, SeriesCompleteEvent } from "../shared.svelte";
     import WordBlock from "./components/WordBlock.svelte";
     import { dndzone } from 'svelte-dnd-action'
     import { flip } from "svelte/animate";
@@ -43,9 +43,16 @@
     )
 
 	function handleSort(e: any) {
-        if (gameState?.puzzleState) {
+        if (gameState?.puzzleState && gameState?.puzzle) {
             gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex] = e.detail.items;
             gameState.puzzleState.timeLeft = gameState.puzzleState.maxTime;
+
+            if (checkPuzzleSolutionValidity(
+                e.detail.items,
+                gameState.puzzle?.series
+            )) {
+                appEvents.dispatchEvent(SeriesCompleteEvent)
+            }
         }
 	}
 </script>

@@ -112,7 +112,7 @@ const checkSeriesSolutionValidity = (solution: Series, series: Series) => {
   return JSON.stringify(seriesTitles) === JSON.stringify(solutionTitles);
 }
 
-const checkPuzzleSolutionValidity = (puzzleSeries: Array<Series>, solutionSeries: Array<Series>) => {
+export const checkPuzzleSolutionValidity = (puzzleSeries: Array<Series>, solutionSeries: Array<Series>) => {
   for (let [puzzleSeriesIndex, _] of puzzleSeries.entries()) {
     try {
       if (
@@ -178,3 +178,10 @@ const timeLeftLoop =  setInterval(() => {
     gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
   }
 }, 1000);
+
+export const SeriesCompleteEvent = new Event("seriesComplete")
+appEvents.addEventListener('seriesComplete', () => {
+  if (gameState.puzzleState) {
+    gameState.puzzleState.currentSeriesIndex += 1;
+  }
+})
