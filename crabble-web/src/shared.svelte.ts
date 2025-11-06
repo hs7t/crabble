@@ -32,7 +32,9 @@ type GameType = "infinite"|"lightning"|"spooky"
 export let gameState = $state({
   puzzle: undefined as Puzzle|undefined,
   puzzleState: undefined as PuzzleState|undefined,
-  gameType: "infinite" as GameType
+  gameType: "infinite" as GameType,
+  gameStatus: "playing" as gameStatus,
+  puzzleRuns: 0 as number
 });
 
 const createWordsFromTitles = (titles: Array<string>) => {
@@ -197,3 +199,19 @@ appEvents.addEventListener('seriesComplete', () => {
   }
 })
 
+appEvents.addEventListener('puzzleComplete', () => {
+  gameState.puzzleRuns += 1 
+  if (gameState.puzzleState) {
+    gameState.puzzleState.status = "won"
+  }
+
+  if (gameState.gameType == "infinite") {
+    updatePuzzle()
+  } else if (gameState.gameType == "lightning" || gameState.gameType == "spooky") {
+    if (gameState.puzzleRuns > 3) {
+      updatePuzzle()
+    } else {
+      gameState.gameStatus = "won"
+    }
+  }
+})
