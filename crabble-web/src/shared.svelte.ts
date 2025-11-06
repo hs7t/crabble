@@ -3,22 +3,24 @@ export const appEvents = new AppEvents();
 
 import * as crabnet from './api'
 
-export type Puzzle = {
-  id: string,
-  series: Array< Array<Word> >
-}
-
-export type PuzzleState = {
-  currentSeriesIndex: number,
-  currentSeriesSolution: Array<Word>,
-  timeLeft: Milliseconds,
-  maxTime: Milliseconds
-}
-
 export type Word = {
   id: number;
   title: string;
 };
+
+export type Series = Array<Word>
+
+export type Puzzle = {
+  id: string,
+  series: Array<Series>
+}
+
+export type PuzzleState = {
+  currentSeriesIndex: number,
+  currentSeriesSolution: Series,
+  timeLeft: Milliseconds,
+  maxTime: Milliseconds
+}
 
 export type Milliseconds = number
 
@@ -31,7 +33,7 @@ export let gameState = $state({
 
 const createWordsFromTitles = (titles: Array<string>) => {
   let workingId = 0
-  let words = [] as Array<Word>
+  let words = [] as Series
 
   for (let title of titles) {
     words.push({
@@ -65,7 +67,7 @@ const getRandomPuzzle = async (currentPuzzleId: string|undefined = undefined) =>
 
   let result = {
     id: randomPuzzle.id as string,
-    series: [] as Array< Array<Word> >,
+    series: [] as Array<Series>,
   } as Puzzle
 
   for (let [seriesIndex, series] of randomPuzzle.series.entries()) {
@@ -85,7 +87,7 @@ export const updatePuzzle = async () => {
   }
 }
 
-const getWordTitles = (solution: Array<Word>) => {
+const getWordTitles = (solution: Series) => {
   let titles = []
   for (let word of solution) {
     titles.push(word.title)
@@ -93,7 +95,7 @@ const getWordTitles = (solution: Array<Word>) => {
   return titles
 }
 
-const checkSeriesSolutionValidity = (solution: Array<Word>, series: Array<Word>) => {
+const checkSeriesSolutionValidity = (solution: Series, series: Series) => {
   let seriesTitles = getWordTitles(series)
   let solutionTitles = getWordTitles(solution)
 
