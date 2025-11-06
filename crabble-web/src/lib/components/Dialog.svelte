@@ -1,7 +1,7 @@
 <script lang="ts">
     import Button from "./Button.svelte";
 
-    let { content, title = "Dialog", shown = $bindable() } = $props()
+    let { content, title = "Dialog", shown = $bindable(), dismissable = true } = $props()
     let dialogReference: HTMLDialogElement
     
     $effect(() => {
@@ -13,7 +13,7 @@
     })
 </script>
 
-<dialog bind:this={dialogReference} onclose={() => shown = false} closedby="any">
+<dialog bind:this={dialogReference} onclose={() => shown = false} closedby={ dismissable ? "any" : "none" }>
     <nav>
         <h2>{title}</h2>
         <Button id="close-button" content="Close" action={() => { shown = false }} />
