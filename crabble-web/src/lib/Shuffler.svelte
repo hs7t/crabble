@@ -84,7 +84,7 @@
         display: flex;
         flex-direction: row;
         flex-grow: 1;
-        justify-content: center;
+        justify-content: flex-start;
         gap: 1ch;
         padding: 1ch;
 
