@@ -28,3 +28,5 @@ async def main():
 @v1_router.get("/puzzles/random")
 async def returnRandomPuzzle(kind: PuzzleKind = "general", currentPuzzle: str|None = None):
     return await getRandomPuzzle(kind, currentPuzzle)
+
+app.include_router(v1_router)
