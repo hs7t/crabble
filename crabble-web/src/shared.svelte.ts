@@ -1,6 +1,8 @@
 class AppEvents extends EventTarget {}
 export const appEvents = new AppEvents();
 
+import * as crabnet from './api'
+
 export type Word = {
   id: number;
   title: string;
@@ -11,11 +13,7 @@ export type Milliseconds = number
 export const PUZZLE_TIME_QUANTITY = 15000 as Milliseconds; 
 
 export let gameState = $state({
-  puzzle: [
-    { id: 1, title: "meow" },
-    { id: 2, title: "woo" },
-    { id: 3, title: "hoo" },
-  ] as Array<Word>,
+  puzzle: [] as Array<Word>,
   currentSolution: [] as Array<Word>,
   timeLeft: PUZZLE_TIME_QUANTITY,
   maxTime: PUZZLE_TIME_QUANTITY,
@@ -39,6 +37,8 @@ const createWordsFromTitles = (titles: Array<string>) => {
       title: title
     } as Word)
   }
+
+  return words
 } 
 
 
