@@ -11,5 +11,11 @@
         {#if status == 'lost'}
             You lost :P
         {/if}
+        {#if status == 'won'}
+            Yay! You won!
+        {/if}
+        {#if status == 'playing'}
+            How'd you get this?!
+        {/if}
     {/snippet}
 </Dialog>
