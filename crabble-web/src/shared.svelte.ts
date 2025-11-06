@@ -19,7 +19,8 @@ export type PuzzleState = {
   currentSeriesIndex: number,
   currentSolution: Array<Series>,
   timeLeft: Milliseconds,
-  maxTime: Milliseconds
+  maxTime: Milliseconds,
+  status: gameStatus
 }
 
 export type Milliseconds = number
@@ -94,6 +95,7 @@ export const updatePuzzle = async () => {
     currentSolution: shuffledPuzzleSeries, 
     timeLeft: PUZZLE_TIME_QUANTITY,
     maxTime: PUZZLE_TIME_QUANTITY,
+    status: "playing"
   }
 }
 
@@ -180,9 +182,15 @@ const timeLeftLoop =  setInterval(() => {
 }, 1000);
 
 export const SeriesCompleteEvent = new Event("seriesComplete")
+export const PuzzleCompleteEvent = new Event("puzzleComplete")
+
 appEvents.addEventListener('seriesComplete', () => {
   if (gameState?.puzzleState && gameState?.puzzle?.series) {
-    if (gameState.puzzle.series.length > ( gameState.puzzleState.currentSeriesIndex + 1 ))
-    gameState.puzzleState.currentSeriesIndex += 1;
+    if (gameState.puzzle.series.length > ( gameState.puzzleState.currentSeriesIndex + 1 )) {
+      gameState.puzzleState.currentSeriesIndex += 1;
+    } else {
+      gameState.puzzleState.status = "won"
+    }
   }
 })
+
