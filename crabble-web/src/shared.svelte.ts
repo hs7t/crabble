@@ -29,20 +29,35 @@ export let gameState = $state({
   puzzleState: undefined as PuzzleState|undefined,
 });
 
-export const getRandomPuzzle = async () => {
+const getRandomPuzzle = async (currentPuzzleId: string|undefined = undefined) => {
+  let options = {
+    searchParams: {}
+  }
+
+  if (currentPuzzleId != undefined) {
+    options["searchParams"] = {
+      currentPuzzle: currentPuzzleId
+    }
+  }
   return await crabnet.parseResponseJSON(
     await crabnet.api.get(
       "puzzles/random", 
       {
-        searchParams: {
-          currentPuzzle: gameState?.puzzle?.id
-        }
+        ...options
       }
     )
   ) as Puzzle
 }
 
-gameState.puzzle = await getRandomPuzzle()
+export const updatePuzzle = async () => {
+  gameState.puzzle = await getRandomPuzzle(gameState?.puzzle?.id)
+  gameState.puzzleState = {
+    currentSeriesIndex: 0,
+    currentSeriesSolution: shuffle(gameState.puzzle.series[0]), 
+    timeLeft: PUZZLE_TIME_QUANTITY,
+    maxTime: PUZZLE_TIME_QUANTITY,
+  }
+}
 
 const getWordTitles = (solution: Array<Word>) => {
   let titles = []
