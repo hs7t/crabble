@@ -3,6 +3,11 @@ export const appEvents = new AppEvents();
 
 import * as crabnet from './api'
 
+export type Puzzle = {
+  id: string,
+  series: Array< Array<Word> >
+}
+
 export type Word = {
   id: number;
   title: string;
@@ -13,11 +18,26 @@ export type Milliseconds = number
 export const PUZZLE_TIME_QUANTITY = 15000 as Milliseconds; 
 
 export let gameState = $state({
-  puzzle: [] as Array<Word>,
+  puzzle: undefined as Puzzle|undefined,
   currentSolution: [] as Array<Word>,
   timeLeft: PUZZLE_TIME_QUANTITY,
   maxTime: PUZZLE_TIME_QUANTITY,
 });
+
+export const getRandomPuzzle = async () => {
+  return await crabnet.parseResponseJSON(
+    await crabnet.api.get(
+      "puzzles/random", 
+      {
+        searchParams: {
+          currentPuzzle: gameState?.puzzle?.id
+        }
+      }
+    )
+  ) as Puzzle
+}
+
+gameState.puzzle = await getRandomPuzzle()
 
 const getWordTitles = (solution: Array<Word>) => {
   let titles = []
@@ -40,7 +60,6 @@ const createWordsFromTitles = (titles: Array<string>) => {
 
   return words
 } 
-
 
 const isWon = (game: typeof gameState) => {
   let puzzleSolutionTitles = getWordTitles(game.currentSolution)
