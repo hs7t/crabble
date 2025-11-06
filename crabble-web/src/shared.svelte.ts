@@ -142,17 +142,17 @@ export type gameStatus = "lost" | "won" | "playing";
 
 export const getOverStatus = (game: typeof gameState) => {
   let status = "playing" as gameStatus;
+
   if (isWon(game)) {
     status = "won";
   } else {
-    if (gameState.timeLeft == 0) {
+    if (game.puzzleState?.timeLeft == 0) {
       status = "lost"
     } else {
       status = "playing";
     }
   }
 
-  console.log(status);
   return status;
 };
 
