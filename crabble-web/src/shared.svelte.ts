@@ -195,15 +195,13 @@ appEvents.addEventListener('seriesComplete', () => {
       gameState.puzzleState.currentSeriesIndex += 1;
     } else {
       gameState.puzzleState.status = "won"
+      appEvents.dispatchEvent(PuzzleCompleteEvent)
     }
   }
 })
 
 appEvents.addEventListener('puzzleComplete', () => {
   gameState.puzzleRuns += 1 
-  if (gameState.puzzleState) {
-    gameState.puzzleState.status = "won"
-  }
 
   if (gameState.gameType == "infinite") {
     updatePuzzle()
