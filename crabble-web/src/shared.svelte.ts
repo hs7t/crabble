@@ -27,9 +27,12 @@ export type Milliseconds = number
 
 export const PUZZLE_TIME_QUANTITY = 15000 as Milliseconds; 
 
+type GameType = "infinite"|"lightning"|"spooky"
+
 export let gameState = $state({
   puzzle: undefined as Puzzle|undefined,
   puzzleState: undefined as PuzzleState|undefined,
+  gameType: "infinite" as GameType
 });
 
 const createWordsFromTitles = (titles: Array<string>) => {
