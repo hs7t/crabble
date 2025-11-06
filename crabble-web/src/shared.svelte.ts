@@ -111,11 +111,31 @@ const checkSeriesSolutionValidity = (solution: Series, series: Series) => {
   return JSON.stringify(seriesTitles) === JSON.stringify(solutionTitles);
 }
 
-const isWon = (game: typeof gameState) => {
-  let puzzleSolutionTitles = getWordTitles(game.currentSolution)
-  let currentSolutionTitles = getWordTitles(game.puzzle)
+const checkPuzzleSolutionValidity = (puzzleSeries: Array<Series>, solutionSeries: Array<Series>) => {
+  for (let [puzzleSeriesIndex, _] of puzzleSeries.entries()) {
+    try {
+      if (
+        !(checkSeriesSolutionValidity(
+          solutionSeries[puzzleSeriesIndex],
+          puzzleSeries[puzzleSeriesIndex]
+        ))
+      ) {
+        return false
+      }
+    } catch {
+      return false
+    }
+  }
 
-  return JSON.stringify(puzzleSolutionTitles) === JSON.stringify(currentSolutionTitles);
+  return true
+}
+
+const isWon = (game: typeof gameState) => {
+  if (game.puzzle?.series == undefined || game.puzzleState?.currentSolution == undefined) {
+    return false
+  }
+
+  return checkPuzzleSolutionValidity(game.puzzle.series, game.puzzleState.currentSolution);
 };
 
 export type gameStatus = "lost" | "won" | "playing";
