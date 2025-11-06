@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { appEvents, checkSeriesSolutionValidity, gameState, SeriesCompleteEvent } from "../shared.svelte";
+    import { appEvents, checkSeriesSolutionValidity, gameState, SeriesCompleteEvent, type Milliseconds } from "../shared.svelte";
     import WordBlock from "./components/WordBlock.svelte";
     import { dndzone } from 'svelte-dnd-action'
     import { flip } from "svelte/animate";
@@ -61,17 +61,19 @@
             }
         }
 	}
+
+    const flipDuration = 200 as Milliseconds
 </script>
 
 <div 
-    use:dndzone="{{items: currentSeries}}" 
+    use:dndzone="{{items: currentSeries, flipDurationMs: flipDuration}}" 
     onconsider={handleConsider} 
     onfinalize={handleSort} 
     class="main-container" 
     bind:this={element}
 >
     {#each currentSeries as word(word.id)}
-        <span class="wordContainer" animate:flip={{duration: 100}}>
+        <span class="wordContainer" animate:flip={{duration: flipDuration}}>
             <WordBlock 
                 word={word.title} 
             />
@@ -84,19 +86,16 @@
         display: flex;
         flex-direction: row;
         flex-grow: 1;
-        justify-content: center;
+        justify-content: flex-start;
         gap: 1ch;
         padding: 1ch;
 
         overflow-x: auto;
         border: var(--c-border-general);
         border-radius: 8pt;
-
-        transition: all 100ms;
     }
 
     .wordContainer:focus, .wordContainer:active {
-        outline: var(--c-border-attention);
-        outline-offset: 3pt;
+        outline: none;
     }
 </style>

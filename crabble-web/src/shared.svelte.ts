@@ -19,16 +19,22 @@ export type PuzzleState = {
   currentSeriesIndex: number,
   currentSolution: Array<Series>,
   timeLeft: Milliseconds,
-  maxTime: Milliseconds
+  maxTime: Milliseconds,
+  status: gameStatus
 }
 
 export type Milliseconds = number
 
 export const PUZZLE_TIME_QUANTITY = 15000 as Milliseconds; 
 
+type GameType = "infinite"|"lightning"|"spooky"
+
 export let gameState = $state({
   puzzle: undefined as Puzzle|undefined,
   puzzleState: undefined as PuzzleState|undefined,
+  gameType: "infinite" as GameType,
+  gameStatus: "playing" as gameStatus,
+  puzzleRuns: 0 as number
 });
 
 const createWordsFromTitles = (titles: Array<string>) => {
@@ -94,6 +100,7 @@ export const updatePuzzle = async () => {
     currentSolution: shuffledPuzzleSeries, 
     timeLeft: PUZZLE_TIME_QUANTITY,
     maxTime: PUZZLE_TIME_QUANTITY,
+    status: "playing"
   }
 }
 
@@ -180,9 +187,29 @@ const timeLeftLoop =  setInterval(() => {
 }, 1000);
 
 export const SeriesCompleteEvent = new Event("seriesComplete")
+export const PuzzleCompleteEvent = new Event("puzzleComplete")
+
 appEvents.addEventListener('seriesComplete', () => {
   if (gameState?.puzzleState && gameState?.puzzle?.series) {
-    if (gameState.puzzle.series.length > ( gameState.puzzleState.currentSeriesIndex + 1 ))
-    gameState.puzzleState.currentSeriesIndex += 1;
+    if (gameState.puzzle.series.length > ( gameState.puzzleState.currentSeriesIndex + 1 )) {
+      gameState.puzzleState.currentSeriesIndex += 1;
+    } else {
+      gameState.puzzleState.status = "won"
+      appEvents.dispatchEvent(PuzzleCompleteEvent)
+    }
+  }
+})
+
+appEvents.addEventListener('puzzleComplete', () => {
+  gameState.puzzleRuns += 1 
+
+  if (gameState.gameType == "infinite") {
+    updatePuzzle()
+  } else if (gameState.gameType == "lightning" || gameState.gameType == "spooky") {
+    if (gameState.puzzleRuns > 3) {
+      updatePuzzle()
+    } else {
+      gameState.gameStatus = "won"
+    }
   }
 })
