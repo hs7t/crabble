@@ -18,5 +18,8 @@
     "svelte-dnd-action": "^0.9.66",
     "typescript": "~5.9.3",
     "vite": "^7.1.7"
+  },
+  "dependencies": {
+    "ky": "^1.14.0"
   }
 }

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { gameState } from "../shared.svelte";
+    import { appEvents, checkSeriesSolutionValidity, gameState, SeriesCompleteEvent } from "../shared.svelte";
     import WordBlock from "./components/WordBlock.svelte";
     import { dndzone } from 'svelte-dnd-action'
     import { flip } from "svelte/animate";
@@ -33,20 +33,44 @@
         })
     })
 
+    let currentSeries = $derived.by(() => 
+        {
+            if (gameState?.puzzleState) {
+                return gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex]
+            }
+            return []
+        }
+    )
+    
+    function handleConsider(e: any) {
+        if (gameState?.puzzleState && gameState?.puzzle) {
+            gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex] = e.detail.items;
+        }
+    }
+
 	function handleSort(e: any) {
-		gameState.currentSolution = e.detail.items;
-        gameState.timeLeft = gameState.maxTime;
+        if (gameState?.puzzleState && gameState?.puzzle) {
+            gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex] = e.detail.items;
+            gameState.puzzleState.timeLeft = gameState.puzzleState.maxTime;
+
+            if (checkSeriesSolutionValidity(
+                gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex],
+                gameState.puzzle.series[gameState.puzzleState.currentSeriesIndex]
+            )) {
+                appEvents.dispatchEvent(SeriesCompleteEvent)
+            }
+        }
 	}
 </script>
 
 <div 
-    use:dndzone="{{items: gameState.currentSolution}}" 
-    on:consider={handleSort} 
-    on:finalize={handleSort} 
+    use:dndzone="{{items: currentSeries}}" 
+    onconsider={handleConsider} 
+    onfinalize={handleSort} 
     class="main-container" 
     bind:this={element}
 >
-    {#each gameState.currentSolution as word(word.id)}
+    {#each currentSeries as word(word.id)}
         <span class="wordContainer" animate:flip={{duration: 100}}>
             <WordBlock 
                 word={word.title} 
