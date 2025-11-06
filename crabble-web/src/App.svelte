@@ -2,9 +2,6 @@
   import GameInfo from "./lib/GameInfo.svelte";
   import GameOver from "./lib/GameOver.svelte";
   import Shuffler from "./lib/Shuffler.svelte";
-
-  import { gameState, getOverStatus } from "./shared.svelte";
-  let currentGameStatus = $derived(getOverStatus(gameState))
 </script>
 
 <main>
@@ -12,7 +9,7 @@
     <Shuffler></Shuffler>
 </main>
 
-<GameOver status={currentGameStatus} />
+<GameOver />
 
 <style>
   :global(body) {
