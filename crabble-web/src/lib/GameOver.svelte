@@ -6,7 +6,7 @@
     let shown = $derived(status === 'lost' || status === 'won')
 </script>
 
-<Dialog {shown}>
+<Dialog {shown} dismissable={false}>
     {#snippet content()}
         {#if status == 'lost'}
             You lost :P
