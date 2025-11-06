@@ -167,10 +167,13 @@ export const shuffle = (array: Array<any>) => {
   return result;
 };
 
-gameState.currentSolution = shuffle(gameState.puzzle);
+updatePuzzle()
 
 const timeLeftLoop =  setInterval(() => {
-  if (gameState.timeLeft > 0) {
-    gameState.timeLeft -= (1000 as Milliseconds);
+  if (
+    gameState.puzzleState?.timeLeft != undefined 
+    && gameState.puzzleState.timeLeft >= 1000
+  ) {
+    gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
   }
 }, 1000);
