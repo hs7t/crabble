@@ -17,7 +17,7 @@ export type Puzzle = {
 
 export type PuzzleState = {
   currentSeriesIndex: number,
-  currentSeriesSolution: Series,
+  currentSolution: Array<Series>,
   timeLeft: Milliseconds,
   maxTime: Milliseconds
 }
@@ -70,7 +70,7 @@ const getRandomPuzzle = async (currentPuzzleId: string|undefined = undefined) =>
     series: [] as Array<Series>,
   } as Puzzle
 
-  for (let [seriesIndex, series] of randomPuzzle.series.entries()) {
+  for (let series of randomPuzzle.series) {
     result.series.push(createWordsFromTitles(series))
   }
 
@@ -79,9 +79,18 @@ const getRandomPuzzle = async (currentPuzzleId: string|undefined = undefined) =>
 
 export const updatePuzzle = async () => {
   gameState.puzzle = await getRandomPuzzle(gameState?.puzzle?.id)
+  
+  let shuffledPuzzleSeries = (() => {
+    let result = []
+    for (let series of gameState.puzzle.series) {
+      result.push(shuffle(series))
+    }
+    return result
+  })()
+
   gameState.puzzleState = {
     currentSeriesIndex: 0,
-    currentSeriesSolution: shuffle(gameState.puzzle.series[0]), 
+    currentSolution: shuffledPuzzleSeries, 
     timeLeft: PUZZLE_TIME_QUANTITY,
     maxTime: PUZZLE_TIME_QUANTITY,
   }
