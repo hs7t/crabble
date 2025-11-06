@@ -81,6 +81,13 @@ const createWordsFromTitles = (titles: Array<string>) => {
   return words
 } 
 
+const checkSeriesSolutionValidity = (solution: Array<Word>, series: Array<Word>) => {
+  let seriesTitles = getWordTitles(series)
+  let solutionTitles = getWordTitles(solution)
+
+  return JSON.stringify(seriesTitles) === JSON.stringify(solutionTitles);
+}
+
 const isWon = (game: typeof gameState) => {
   let puzzleSolutionTitles = getWordTitles(game.currentSolution)
   let currentSolutionTitles = getWordTitles(game.puzzle)
