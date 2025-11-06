@@ -105,7 +105,7 @@ const getWordTitles = (solution: Series) => {
   return titles
 }
 
-const checkSeriesSolutionValidity = (solution: Series, series: Series) => {
+export const checkSeriesSolutionValidity = (solution: Series, series: Series) => {
   let seriesTitles = getWordTitles(series)
   let solutionTitles = getWordTitles(solution)
 
@@ -181,7 +181,8 @@ const timeLeftLoop =  setInterval(() => {
 
 export const SeriesCompleteEvent = new Event("seriesComplete")
 appEvents.addEventListener('seriesComplete', () => {
-  if (gameState.puzzleState) {
+  if (gameState?.puzzleState && gameState?.puzzle?.series) {
+    if (gameState.puzzle.series.length > ( gameState.puzzleState.currentSeriesIndex + 1 ))
     gameState.puzzleState.currentSeriesIndex += 1;
   }
 })

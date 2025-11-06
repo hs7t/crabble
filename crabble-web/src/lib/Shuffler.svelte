@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { appEvents, checkPuzzleSolutionValidity, gameState, SeriesCompleteEvent } from "../shared.svelte";
+    import { appEvents, checkSeriesSolutionValidity, gameState, SeriesCompleteEvent } from "../shared.svelte";
     import WordBlock from "./components/WordBlock.svelte";
     import { dndzone } from 'svelte-dnd-action'
     import { flip } from "svelte/animate";
@@ -41,15 +41,21 @@
             return []
         }
     )
+    
+    function handleConsider(e: any) {
+        if (gameState?.puzzleState && gameState?.puzzle) {
+            gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex] = e.detail.items;
+        }
+    }
 
 	function handleSort(e: any) {
         if (gameState?.puzzleState && gameState?.puzzle) {
             gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex] = e.detail.items;
             gameState.puzzleState.timeLeft = gameState.puzzleState.maxTime;
 
-            if (checkPuzzleSolutionValidity(
-                e.detail.items,
-                gameState.puzzle?.series
+            if (checkSeriesSolutionValidity(
+                gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex],
+                gameState.puzzle.series[gameState.puzzleState.currentSeriesIndex]
             )) {
                 appEvents.dispatchEvent(SeriesCompleteEvent)
             }
@@ -59,7 +65,7 @@
 
 <div 
     use:dndzone="{{items: currentSeries}}" 
-    onconsider={handleSort} 
+    onconsider={handleConsider} 
     onfinalize={handleSort} 
     class="main-container" 
     bind:this={element}
