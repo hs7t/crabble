@@ -40,6 +40,7 @@ const createWordsFromTitles = (titles: Array<string>) => {
       id: workingId,
       title: title
     } as Word)
+    workingId++
   }
 
   return words
