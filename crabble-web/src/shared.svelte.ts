@@ -29,6 +29,20 @@ export let gameState = $state({
   puzzleState: undefined as PuzzleState|undefined,
 });
 
+const createWordsFromTitles = (titles: Array<string>) => {
+  let workingId = 0
+  let words = [] as Array<Word>
+
+  for (let title of titles) {
+    words.push({
+      id: workingId,
+      title: title
+    } as Word)
+  }
+
+  return words
+}
+
 const getRandomPuzzle = async (currentPuzzleId: string|undefined = undefined) => {
   let options = {
     searchParams: {}
@@ -39,14 +53,26 @@ const getRandomPuzzle = async (currentPuzzleId: string|undefined = undefined) =>
       currentPuzzle: currentPuzzleId
     }
   }
-  return await crabnet.parseResponseJSON(
+
+  const randomPuzzle = await crabnet.parseResponseJSON(
     await crabnet.api.get(
       "puzzles/random", 
       {
         ...options
       }
     )
-  ) as Puzzle
+  )
+
+  let result = {
+    id: randomPuzzle.id as string,
+    series: [] as Array< Array<Word> >,
+  } as Puzzle
+
+  for (let [seriesIndex, series] of randomPuzzle.series.entries()) {
+    result.series.push(createWordsFromTitles(series))
+  }
+
+  return result
 }
 
 export const updatePuzzle = async () => {
@@ -66,20 +92,6 @@ const getWordTitles = (solution: Array<Word>) => {
   }
   return titles
 }
-
-const createWordsFromTitles = (titles: Array<string>) => {
-  let workingId = 0
-  let words = [] as Array<Word>
-
-  for (let title of titles) {
-    words.push({
-      id: workingId,
-      title: title
-    } as Word)
-  }
-
-  return words
-} 
 
 const checkSeriesSolutionValidity = (solution: Array<Word>, series: Array<Word>) => {
   let seriesTitles = getWordTitles(series)
