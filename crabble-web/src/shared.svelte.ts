@@ -8,6 +8,13 @@ export type Puzzle = {
   series: Array< Array<Word> >
 }
 
+export type PuzzleState = {
+  currentSeriesIndex: number,
+  currentSeriesSolution: Array<Word>,
+  timeLeft: Milliseconds,
+  maxTime: Milliseconds
+}
+
 export type Word = {
   id: number;
   title: string;
@@ -19,9 +26,7 @@ export const PUZZLE_TIME_QUANTITY = 15000 as Milliseconds;
 
 export let gameState = $state({
   puzzle: undefined as Puzzle|undefined,
-  currentSolution: [] as Array<Word>,
-  timeLeft: PUZZLE_TIME_QUANTITY,
-  maxTime: PUZZLE_TIME_QUANTITY,
+  puzzleState: undefined as PuzzleState|undefined,
 });
 
 export const getRandomPuzzle = async () => {
