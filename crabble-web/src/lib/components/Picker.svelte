@@ -1,5 +1,5 @@
 <script lang="ts">
-    let { radioName, options = [] as Array<Option> } = $props()
+    let { radioName, options = [] as Array<Option>, selectedValue = $bindable(undefined) } = $props()
 
     type Option = {
        value: string,
@@ -14,6 +14,7 @@
             id={radioName + "-choice-" + option.value} 
             name={radioName} 
             value={option.value}
+            bind:group={selectedValue}
         >
         <label 
             for={radioName + "-choice-" + option.value}
