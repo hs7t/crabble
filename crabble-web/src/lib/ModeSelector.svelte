@@ -7,7 +7,23 @@
 
 <Dialog bind:shown={shown}>
     {#snippet content()}
-        <Picker></Picker>
+        <Picker 
+            radioName="gameModeRadioSelector"
+            options={[
+                {
+                    value: "spooky",
+                    label: "Spooky"
+                },
+                {
+                    value: "infinite",
+                    label: "Infinite"
+                },
+                {
+                    value: "lightning",
+                    label: "Lightning"
+                }
+            ]}
+        ></Picker>
     {/snippet}
 </Dialog>
 
