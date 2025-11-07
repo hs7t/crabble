@@ -175,19 +175,9 @@ export const shuffle = (array: Array<any>) => {
   return result;
 };
 
-updatePuzzle()
-
-const timeLeftLoop =  setInterval(() => {
-  if (
-    gameState.puzzleState?.timeLeft != undefined 
-    && gameState.puzzleState.timeLeft >= 1000
-  ) {
-    gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
-  }
-}, 1000);
-
 export const SeriesCompleteEvent = new Event("seriesComplete")
 export const PuzzleCompleteEvent = new Event("puzzleComplete")
+export const GameStartEvent = new Event("gameStart")
 
 appEvents.addEventListener('seriesComplete', () => {
   if (gameState?.puzzleState && gameState?.puzzle?.series) {
@@ -212,4 +202,16 @@ appEvents.addEventListener('puzzleComplete', () => {
       gameState.gameStatus = "won"
     }
   }
+})
+
+appEvents.addEventListener('gameStart', () => {
+  const timeLeftLoop = setInterval(() => {
+    if (
+      gameState.puzzleState?.timeLeft != undefined 
+      && gameState.puzzleState.timeLeft >= 1000
+    ) {
+      gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
+    }
+  }, 1000);
+  updatePuzzle();
 })
