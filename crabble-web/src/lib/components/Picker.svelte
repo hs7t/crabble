@@ -1,14 +1,24 @@
-<script>
+<script lang="ts">
+    let { radioName, options = [] as Array<Option> } = $props()
 
+    type Option = {
+       value: string,
+       label: string
+    }
 </script>
 
 <div role="radiogroup">
-    <input type="radio" id="nameChoiceA" name="catName" value="michael">
-    <label for="nameChoiceA">Michael</label>
-
-    <input type="radio" id="nameChoiceB" name="catName" value="sam">
-    <label for="nameChoiceA">Sam</label>
-
-    <input type="radio" id="nameChoiceC" name="catName" value="taylor">
-    <label for="nameChoiceA">Taylor</label>
+    {#each options as option}
+        <input 
+            type="radio" 
+            id={radioName + "-choice-" + option.value} 
+            name={radioName} 
+            value={option.value}
+        >
+        <label 
+            for={radioName + "-choice-" + option.value}
+        >
+            {option.label}
+        </label>
+    {/each}
 </div>
