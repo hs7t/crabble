@@ -15,6 +15,8 @@ export type Puzzle = {
   series: Array<Series>
 }
 
+export type PuzzleType = "general"|"spooky"
+
 export type PuzzleState = {
   currentSeriesIndex: number,
   currentSolution: Array<Series>,
@@ -52,13 +54,16 @@ const createWordsFromTitles = (titles: Array<string>) => {
   return words
 }
 
-const getRandomPuzzle = async (currentPuzzleId: string|undefined = undefined) => {
+const getRandomPuzzle = async (currentPuzzleId: string|undefined = undefined, puzzleType: PuzzleType = "general") => {
   let options = {
-    searchParams: {}
-  }
+    searchParams: {
+      kind: puzzleType
+    }
+  } as any
 
   if (currentPuzzleId != undefined) {
     options["searchParams"] = {
+      ...options?.["searchParams"],
       currentPuzzle: currentPuzzleId
     }
   }
@@ -85,8 +90,14 @@ const getRandomPuzzle = async (currentPuzzleId: string|undefined = undefined) =>
 }
 
 export const updatePuzzle = async () => {
-  gameState.puzzle = await getRandomPuzzle(gameState?.puzzle?.id)
+  let puzzleType: PuzzleType = "general"  // could be within one line below, but maintainability!!
+  if (gameState.gameType == "spooky") { 
+    puzzleType = "spooky"
+  }
+
+  gameState.puzzle = await getRandomPuzzle(gameState?.puzzle?.id, puzzleType)
   
+
   let shuffledPuzzleSeries = (() => {
     let result = []
     for (let series of gameState.puzzle.series) {
@@ -175,19 +186,9 @@ export const shuffle = (array: Array<any>) => {
   return result;
 };
 
-updatePuzzle()
-
-const timeLeftLoop =  setInterval(() => {
-  if (
-    gameState.puzzleState?.timeLeft != undefined 
-    && gameState.puzzleState.timeLeft >= 1000
-  ) {
-    gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
-  }
-}, 1000);
-
 export const SeriesCompleteEvent = new Event("seriesComplete")
 export const PuzzleCompleteEvent = new Event("puzzleComplete")
+export const GameStartEvent = new Event("gameStart")
 
 appEvents.addEventListener('seriesComplete', () => {
   if (gameState?.puzzleState && gameState?.puzzle?.series) {
@@ -212,4 +213,16 @@ appEvents.addEventListener('puzzleComplete', () => {
       gameState.gameStatus = "won"
     }
   }
+})
+
+appEvents.addEventListener('gameStart', () => {
+  const timeLeftLoop = setInterval(() => {
+    if (
+      gameState.puzzleState?.timeLeft != undefined 
+      && gameState.puzzleState.timeLeft >= 1000
+    ) {
+      gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
+    }
+  }, 1000);
+  updatePuzzle();
 })
