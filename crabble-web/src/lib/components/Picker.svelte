@@ -1,13 +1,44 @@
 <script lang="ts">
-    let { radioName, options = [] as Array<Option>, selectedValue = $bindable(undefined) } = $props()
+    let { radioName, options = [] as Array<Option>, selectedValue = $bindable(undefined), primary = true } = $props()
+    import { onMount } from "svelte";
+
+    let element = undefined as undefined|HTMLElement
 
     type Option = {
        value: string,
        label: string
     }
+
+    if (primary) {
+        onMount(() => {
+            document.addEventListener('keyup', (event: any) => {
+                let isFocusedInside = element?.contains(document.activeElement)
+                if (!isFocusedInside) {
+                    if (event.code == "KeyQ") {
+                        const firstChild = element?.querySelector('.radioInput') as HTMLElement
+                        firstChild?.focus()
+                    }
+                    if (event.code == "KeyW") {
+                        const children = element?.querySelectorAll('.radioInput')
+                        const lastChild = children?.[children.length - 1] as HTMLElement
+                        lastChild?.focus()
+                    }
+                }
+            })
+
+            element?.addEventListener('keyup', (event) => {
+                if (event.code == "KeyW") {
+                    ((event.target as HTMLElement)?.parentElement?.nextElementSibling?.querySelector("input") as HTMLElement)?.focus()
+                }
+                if (event.code == "KeyQ") {
+                    ((event.target as HTMLElement)?.parentElement?.previousElementSibling?.querySelector("input") as HTMLElement)?.focus()
+                }
+            })
+        })
+    }
 </script>
 
-<div role="radiogroup" class="picker">
+<div role="radiogroup" class="picker" bind:this={element}>
     {#each options as option}
         <!-- This click event is an extremely hacky solution - I really couldn't find anything else. -->
         <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -19,6 +50,7 @@
                 name={radioName} 
                 value={option.value}
                 bind:group={selectedValue}
+                class="radioInput"
             >
             <label 
                 for={radioName + "-choice-" + option.value}
