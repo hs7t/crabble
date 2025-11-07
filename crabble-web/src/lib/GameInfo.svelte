@@ -18,12 +18,26 @@
     })
 </script>
 
-<div class="progress">
-    <ProgressBar currentValue={timeLeft} maxValue={maxTime}></ProgressBar>
-    {timeLeft}
-</div>
+<section>
+    <h1>crabble!</h1>
+    <div class="progress">
+        <ProgressBar currentValue={timeLeft} maxValue={maxTime}></ProgressBar>
+        {timeLeft}
+    </div>
+</section>
 
 <style>
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        gap: 0.6rem;
+    }
+    section h1 {
+        color: var(--c-color-accent-A);
+    }
+
     .progress {
         width: 100%;
 
