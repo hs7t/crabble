@@ -19,7 +19,7 @@
     --c-border-general: dashed 1.2pt var(--c-color-main-secondary);
     --c-border-attention: dashed 1.2pt var(--c-color-accent-D);
 
-    --c-font-primary: Inter, system-ui, sans-serif;
+    --c-font-primary: "National Park", system-ui, sans-serif;
     
     --c-radius-primary: 8pt;
 }
