@@ -1,8 +1,15 @@
 <script>
+    import { appEvents, GameStartEvent, gameState } from "../shared.svelte";
+    import Button from "./components/Button.svelte";
     import Dialog from "./components/Dialog.svelte";
     import Picker from "./components/Picker.svelte";
 
     let { shown = $bindable(true) } = $props()
+
+    const handleGameStart = async () => {
+        appEvents.dispatchEvent(GameStartEvent)
+        shown = false;
+    }
 </script>
 
 <Dialog bind:shown={shown} dismissable={false}>
@@ -23,7 +30,9 @@
                     label: "Spooky"
                 },
             ]}
+            bind:selectedValue={gameState.gameType}
         ></Picker>
+        <Button action={handleGameStart} content="Start!"></Button>
     {/snippet}
 </Dialog>
 
