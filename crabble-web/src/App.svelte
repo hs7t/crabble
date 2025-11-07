@@ -45,10 +45,11 @@
     flex-direction: column;
     justify-items: center;
     height: 100%;
-    gap: 1.4rem;
-    padding-top: 10%;
-
     width: clamp(50dvw, 500px, 80dvw);
+
+    gap: 1.4rem;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
     margin: auto;
   }
 
