@@ -15,6 +15,8 @@ export type Puzzle = {
   series: Array<Series>
 }
 
+export type PuzzleType = "general"|"spooky"
+
 export type PuzzleState = {
   currentSeriesIndex: number,
   currentSolution: Array<Series>,
@@ -52,13 +54,16 @@ const createWordsFromTitles = (titles: Array<string>) => {
   return words
 }
 
-const getRandomPuzzle = async (currentPuzzleId: string|undefined = undefined) => {
+const getRandomPuzzle = async (currentPuzzleId: string|undefined = undefined, puzzleType: PuzzleType = "general") => {
   let options = {
-    searchParams: {}
-  }
+    searchParams: {
+      kind: puzzleType
+    }
+  } as any
 
   if (currentPuzzleId != undefined) {
     options["searchParams"] = {
+      ...options?.["searchParams"],
       currentPuzzle: currentPuzzleId
     }
   }
@@ -85,8 +90,14 @@ const getRandomPuzzle = async (currentPuzzleId: string|undefined = undefined) =>
 }
 
 export const updatePuzzle = async () => {
-  gameState.puzzle = await getRandomPuzzle(gameState?.puzzle?.id)
+  let puzzleType: PuzzleType = "general"  // could be within one line below, but maintainability!!
+  if (gameState.gameType == "spooky") { 
+    puzzleType = "spooky"
+  }
+
+  gameState.puzzle = await getRandomPuzzle(gameState?.puzzle?.id, puzzleType)
   
+
   let shuffledPuzzleSeries = (() => {
     let result = []
     for (let series of gameState.puzzle.series) {
