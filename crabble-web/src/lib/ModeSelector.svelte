@@ -12,7 +12,7 @@
     }
 </script>
 
-<Dialog bind:shown={shown} dismissable={false}>
+<Dialog bind:shown={shown} dismissable={false} title="crabble!">
     {#snippet content()}
         <Picker 
             radioName="gameModeRadioSelector"
