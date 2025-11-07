@@ -3,12 +3,15 @@
   import GameOver from "./lib/GameOver.svelte";
   import ModeSelector from "./lib/ModeSelector.svelte";
   import Shuffler from "./lib/Shuffler.svelte";
+  import { gameState } from "./shared.svelte";
 </script>
 
 <main>
     <ModeSelector></ModeSelector>
-    <GameInfo></GameInfo>
-    <Shuffler></Shuffler>
+    {#if gameState.puzzle}
+      <GameInfo></GameInfo>
+      <Shuffler></Shuffler>
+    {/if}
 </main>
 
 <GameOver />
