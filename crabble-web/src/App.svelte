@@ -18,6 +18,11 @@
     font-family: var(--c-font-primary);
     font-feature-settings: 'liga' 1, 'calt' 1;
   }
+
+  :global(h1, h2, h3, h4, h5, p) {
+    margin: 0;
+    padding: 0;
+  }
   main {
     display: flex;
     flex-direction: column;
