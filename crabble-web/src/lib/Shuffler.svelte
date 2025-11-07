@@ -96,6 +96,7 @@
     }
 
     .wordContainer:focus, .wordContainer:active {
-        outline: none;
+        outline: var(--c-border-attention);
+        outline-offset: 3pt;
     }
 </style>
