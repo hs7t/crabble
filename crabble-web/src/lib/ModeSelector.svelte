@@ -5,15 +5,11 @@
     let { shown = $bindable(true) } = $props()
 </script>
 
-<Dialog bind:shown={shown}>
+<Dialog bind:shown={shown} dismissable={false}>
     {#snippet content()}
         <Picker 
             radioName="gameModeRadioSelector"
             options={[
-                {
-                    value: "spooky",
-                    label: "Spooky"
-                },
                 {
                     value: "infinite",
                     label: "Infinite"
@@ -21,7 +17,11 @@
                 {
                     value: "lightning",
                     label: "Lightning"
-                }
+                },
+                {
+                    value: "spooky",
+                    label: "Spooky"
+                },
             ]}
         ></Picker>
     {/snippet}
