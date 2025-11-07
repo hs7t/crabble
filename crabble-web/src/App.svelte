@@ -1,10 +1,12 @@
 <script lang="ts">
   import GameInfo from "./lib/GameInfo.svelte";
   import GameOver from "./lib/GameOver.svelte";
+  import ModeSelector from "./lib/ModeSelector.svelte";
   import Shuffler from "./lib/Shuffler.svelte";
 </script>
 
 <main>
+    <ModeSelector></ModeSelector>
     <GameInfo></GameInfo>
     <Shuffler></Shuffler>
 </main>
