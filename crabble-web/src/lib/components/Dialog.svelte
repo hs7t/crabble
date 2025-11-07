@@ -16,7 +16,9 @@
 <dialog bind:this={dialogReference} onclose={() => shown = false} closedby={ dismissable ? "any" : "none" }>
     <nav>
         <h2>{title}</h2>
-        <Button id="close-button" content="Close" action={() => { shown = false }} />
+        {#if dismissable}
+            <Button id="close-button" content="Close" action={() => { shown = false }} />
+        {/if}
     </nav>
     {@render content()}
 </dialog>
