@@ -2,6 +2,9 @@
 
 A fast-paced word game where you unscramble strings of words.
 
+<img width="2194" height="1514" alt="image" src="https://github.com/user-attachments/assets/bc4396cb-2f0d-4dde-82ab-a70f6a2fabbe" />
+
+
 > [!NOTE]
 > **Hi, reviewer!** I commit a lot - I apologise in advance. I've tried to take
 > some steps to make reviewing easier: I'm committing less and have started
