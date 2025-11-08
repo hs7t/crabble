@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { appEvents, checkSeriesSolutionValidity, gameState, SeriesCompleteEvent, type Milliseconds } from "../shared.svelte";
+    import { appEvents, checkSeriesSolutionValidity, gameState, SeriesCompleteEvent, type Milliseconds, type Series, type Word } from "../shared.svelte";
     import WordBlock from "./components/WordBlock.svelte";
     import { dndzone } from 'svelte-dnd-action'
     import { flip } from "svelte/animate";
@@ -71,11 +71,26 @@
     }
 
 	function handleSort(e: any) {
+        let sorting = (() => {
+            let items = [] as Series
+            for (let item of e.detail.items) {
+                items.push({
+                    id: item.id,
+                    title: item.title
+                } as Word)
+            }
+            return items
+        })()
+
         if (gameState?.puzzleState && gameState?.puzzle) {
             if (
                 gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex]
-                != e.detail.items
+                != sorting
             ) {
+                console.log(
+                    gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex],
+                    e.detail.items
+                )
                 gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex] = e.detail.items;
                 gameState.puzzleState.timeLeft = gameState.puzzleState.maxTime;
                 gameState.totalMovements += 1;
