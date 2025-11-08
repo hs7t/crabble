@@ -180,6 +180,10 @@ appEvents.addEventListener('gameStart', () => {
     ) {
       gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
     }
+    
+    if (gameState.puzzleState?.timeLeft == 0) {
+      gameState.gameStatus = "lost"
+    }
   }, 1000);
   updatePuzzle();
 })
