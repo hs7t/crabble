@@ -91,6 +91,10 @@
         align-self: flex-end;
     }
 
+    section {
+        width: 100%;
+    }
+
     dialog section.content {
         flex-grow: 1;
         overflow: visible;
