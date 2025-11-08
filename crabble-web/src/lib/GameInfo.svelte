@@ -22,7 +22,7 @@
     <h1>crabble!</h1>
     <div class="progress">
         <ProgressBar currentValue={timeLeft} maxValue={maxTime}></ProgressBar>
-        {timeLeft}
+        <span class="time-indicator">{timeLeft}</span>
     </div>
 </section>
 
@@ -34,8 +34,15 @@
 
         gap: 0.6rem;
     }
+
+    .time-indicator {
+        user-select: none;
+        font-weight: 500;
+    }
+
     section h1 {
         color: var(--c-color-accent-A);
+        user-select: none;
     }
 
     .progress {

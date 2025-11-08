@@ -22,7 +22,7 @@ export type PuzzleState = {
   currentSolution: Array<Series>,
   timeLeft: Milliseconds,
   maxTime: Milliseconds,
-  status: gameStatus
+  status: gameStatus 
 }
 
 export type Milliseconds = number
@@ -36,7 +36,9 @@ export let gameState = $state({
   puzzleState: undefined as PuzzleState|undefined,
   gameType: "lightning" as GameType,
   gameStatus: "playing" as gameStatus,
-  puzzleRuns: 0 as number
+  puzzleRuns: 0 as number, 
+  playTime: 0 as Milliseconds,
+  totalMovements: 0 as number,
 });
 
 const createWordsFromTitles = (titles: Array<string>) => {
@@ -169,19 +171,42 @@ export const shuffle = (array: Array<any>) => {
 export const SeriesCompleteEvent = new Event("seriesComplete")
 export const PuzzleCompleteEvent = new Event("puzzleComplete")
 export const GameStartEvent = new Event("gameStart")
+export const GameEndEvent = new Event("gameEnd")
+export const RestartGameEvent = new Event("restartGame")
 
 let timeLoop: number|undefined
 
 appEvents.addEventListener('gameStart', () => {
+  updatePuzzle();
+  gameState.gameStatus = "playing";
+
   timeLoop = setInterval(() => {
-    if (
-      gameState.puzzleState?.timeLeft != undefined 
-      && gameState.puzzleState.timeLeft >= 1000
-    ) {
-      gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
+    if (gameState.puzzleState) {
+      if (gameState.puzzleState.timeLeft >= 1000) {
+        gameState.puzzleState.timeLeft -= 1000 as Milliseconds;
+      }
+
+      if (gameState.puzzleState?.timeLeft == 0) {
+        appEvents.dispatchEvent(GameEndEvent);
+      }
+
+      gameState.playTime += 1000 as Milliseconds;
     }
   }, 1000);
-  updatePuzzle();
+})
+
+appEvents.addEventListener('gameEnd', () => {
+  clearInterval(timeLoop)
+  gameState.gameStatus = "lost";
+})
+
+
+appEvents.addEventListener("restartGame", () => {
+  clearInterval(timeLoop)
+  gameState.playTime = 0
+  gameState.puzzleRuns = 0
+  gameState.totalMovements = 0
+  appEvents.dispatchEvent(GameStartEvent)
 })
 
 appEvents.addEventListener('seriesComplete', () => {
@@ -205,7 +230,7 @@ appEvents.addEventListener('puzzleComplete', () => {
       updatePuzzle()
     } else {
       gameState.gameStatus = "won"
-      clearTimeout(timeLoop)
+      clearInterval(timeLoop)
     }
   }
 })

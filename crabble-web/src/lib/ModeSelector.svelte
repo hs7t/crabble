@@ -48,11 +48,22 @@
             <details>
                 <summary>How to play</summary>
                 <ul>
-                    <li>Complete a puzzle by putting each series of words in the correct order.</li>
-                    <li>Use <code>Q</code> or <code>W</code> to select blocks.</li>
-                    <li>Use <code>Space</code> to pick up a word. Then, use your arrow keys to move it.</li>
-                    <li>Hit <code>Space</code> again to set down the word.</li>
-                    <li>Not using a keyboard? Don't worry. Drag any word to set it in the right place.</li>
+                    <li>
+                        Complete a puzzle by putting each series of words in the correct order.
+                        <ul>
+                            <li>Use <code>Q</code> or <code>W</code> to select words.</li>
+                            <li>Use <code>Space</code> to pick up a word. Then, use your arrow keys to move it.</li>
+                            <li>Hit <code>Space</code> again to set down the word.</li>
+                            <li>Not using a keyboard? Don't worry. Drag any word to set it in the right place.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Keep an eye on the time!
+                        <ul>
+                            <li>Moving a word gives you more time.</li>
+                            <li>You'll lose if you run out of time.</li>
+                        </ul>
+                    </li>
                 </ul>
             </details>
         </section>
