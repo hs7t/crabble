@@ -71,30 +71,27 @@
     }
 
 	function handleSort(e: any) {
-        let sorting = (() => {
-            let items = [] as Series
-            for (let item of e.detail.items) {
-                items.push({
+        const getWordsOnly = (items: Array<any>) => {
+            let result = [] as Series
+            for (let item of items) {
+                result.push({
                     id: item.id,
                     title: item.title
                 } as Word)
             }
-            return items
-        })()
+            return result
+        }
 
         if (gameState?.puzzleState && gameState?.puzzle) {
             if (
-                gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex]
-                != sorting
+                JSON.stringify(getWordsOnly(gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex]))
+                != JSON.stringify(getWordsOnly(e.detail.items))
             ) {
-                console.log(
-                    gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex],
-                    e.detail.items
-                )
-                gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex] = e.detail.items;
                 gameState.puzzleState.timeLeft = gameState.puzzleState.maxTime;
                 gameState.totalMovements += 1;
             }
+            
+            gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex] = e.detail.items;
 
             if (checkSeriesSolutionValidity(
                 gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex],
