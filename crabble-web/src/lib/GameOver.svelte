@@ -4,12 +4,22 @@
     let status = $derived.by(() => getOverStatus(gameState))
      
     let shown = $derived(status === 'lost' || status === 'won')
+    let dialogTitle = $derived.by(() => {
+        switch (getOverStatus(gameState)) {
+            case "playing":
+                return "Time!"
+            case "lost":
+                return "Time!"
+            case "won":
+                return "Woah!"
+        }
+    })
 </script>
 
-<Dialog {shown} dismissable={false} title="Woah!">
+<Dialog {shown} dismissable={false} title={dialogTitle}>
     {#snippet content()}
         {#if status == 'lost'}
-            You lost :P
+            <p>Awh, you lost! That's okay.</p>
         {/if}
         {#if status == 'won'}
             Yay! You won!

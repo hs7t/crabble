@@ -22,7 +22,8 @@ export type PuzzleState = {
   currentSolution: Array<Series>,
   timeLeft: Milliseconds,
   maxTime: Milliseconds,
-  status: gameStatus
+  status: gameStatus, 
+  playTimeElapsed: Milliseconds
 }
 
 export type Milliseconds = number
@@ -111,6 +112,7 @@ export const updatePuzzle = async () => {
     currentSolution: shuffledPuzzleSeries, 
     timeLeft: PUZZLE_TIME_QUANTITY,
     maxTime: PUZZLE_TIME_QUANTITY,
+    playTimeElapsed: 0,
     status: "playing"
   }
 }
@@ -174,17 +176,19 @@ let timeLoop: number|undefined
 
 appEvents.addEventListener('gameStart', () => {
   timeLoop = setInterval(() => {
-    if (
-      gameState.puzzleState?.timeLeft != undefined 
-      && gameState.puzzleState.timeLeft >= 1000
-    ) {
-      gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
-    }
-    
-    if (gameState.puzzleState?.timeLeft == 0) {
-      gameState.gameStatus = "lost"
-    }
+    if (gameState.puzzleState) {
+      if (gameState.puzzleState.timeLeft >= 1000) {
+        gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
+      }
+      
+      if (gameState.puzzleState?.timeLeft == 0) {
+        gameState.gameStatus = "lost"
+      }
+
+      gameState.puzzleState.playTimeElapsed += (1000 as Milliseconds)
+    }    
   }, 1000);
+
   updatePuzzle();
 })
 
