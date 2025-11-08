@@ -9,14 +9,21 @@
 <main>
     <ModeSelector></ModeSelector>
     {#if gameState.puzzle}
-      <GameInfo></GameInfo>
-      <Shuffler></Shuffler>
+      <span class="first layout-group">
+        <GameInfo></GameInfo>
+      </span>
+      <span class="second layout-group">
+        <Shuffler></Shuffler>
+      </span>
     {/if}
 </main>
 
 <GameOver />
 
 <style>
+  :global(*) {
+    box-sizing: border-box;
+  }
   :global(body) {
     font-family: var(--c-font-primary);
     font-feature-settings: 'liga' 1, 'calt' 1;
@@ -26,11 +33,30 @@
     margin: 0;
     padding: 0;
   }
+
+  :global(#app, body) {
+    height: 100dvh;
+    padding: 0;
+    margin: 0;
+  }
+
   main {
     display: flex;
     flex-direction: column;
-
+    justify-items: center;
+    height: 100%;
     width: clamp(50dvw, 500px, 80dvw);
+
+    gap: 1.4rem;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
     margin: auto;
+  }
+
+  .second.layout-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
   }
 </style>

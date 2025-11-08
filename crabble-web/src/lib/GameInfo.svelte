@@ -5,18 +5,45 @@
     let timeLeft = $derived.by(() => {
         let value = 0
         if (gameState?.puzzleState) {
-            value = gameState.puzzleState.timeLeft
+            value = (gameState.puzzleState.timeLeft / 1000)
         }
         return value
     })
     let maxTime = $derived.by(() => {
         let value = 0
         if (gameState?.puzzleState) {
-            value = gameState.puzzleState.maxTime
+            value = (gameState.puzzleState.maxTime / 1000)
         }
         return value
     })
 </script>
 
-<ProgressBar currentValue={timeLeft} maxValue={maxTime}></ProgressBar>
-{timeLeft}
+<section>
+    <h1>crabble!</h1>
+    <div class="progress">
+        <ProgressBar currentValue={timeLeft} maxValue={maxTime}></ProgressBar>
+        {timeLeft}
+    </div>
+</section>
+
+<style>
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        gap: 0.6rem;
+    }
+    section h1 {
+        color: var(--c-color-accent-A);
+    }
+
+    .progress {
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.8rem;
+    }
+</style>

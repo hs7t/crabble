@@ -41,6 +41,28 @@
             return []
         }
     )
+
+    let wordColors = new Map<number, string>();
+
+    const getRandomAccentColorVariable = () => {
+        const accentColorVariables = [
+            "--c-color-accent-A",
+            "--c-color-accent-B",
+            "--c-color-accent-C",
+            "--c-color-accent-D",
+        ]
+
+        return accentColorVariables[
+            Math.floor(Math.random() * accentColorVariables.length)
+        ]
+    }
+
+    const getColorForWord = (wordId: number) => {
+        if (!wordColors.has(wordId)) {
+            wordColors.set(wordId, getRandomAccentColorVariable());
+        }
+        return wordColors.get(wordId)!;
+    }
     
     function handleConsider(e: any) {
         if (gameState?.puzzleState && gameState?.puzzle) {
@@ -73,9 +95,14 @@
     bind:this={element}
 >
     {#each currentSeries as word(word.id)}
+        {@const colorVar = getColorForWord(word.id)}
         <span class="wordContainer" animate:flip={{duration: flipDuration}}>
             <WordBlock 
                 word={word.title} 
+                style="
+                    --background-color: var({colorVar}) !important;
+                    --color: var({colorVar}-contrast) !important;
+                "
             />
         </span>
     {/each}
@@ -96,6 +123,7 @@
     }
 
     .wordContainer:focus, .wordContainer:active {
-        outline: none;
+        outline: var(--c-border-attention);
+        outline-offset: 3pt;
     }
 </style>

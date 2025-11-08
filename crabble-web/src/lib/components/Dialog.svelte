@@ -26,6 +26,7 @@
 <style>
     dialog {
         width: clamp(280px, 100%, 560px);
+        max-height: 80dvh;
         display: flex;
         flex-direction: column;
         gap: 1rem;
