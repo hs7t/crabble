@@ -177,23 +177,22 @@ export const RestartGameEvent = new Event("restartGame")
 let timeLoop: number|undefined
 
 appEvents.addEventListener('gameStart', () => {
+  updatePuzzle();
   gameState.gameStatus = "playing";
-  
+
   timeLoop = setInterval(() => {
     if (gameState.puzzleState) {
       if (gameState.puzzleState.timeLeft >= 1000) {
-        gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
+        gameState.puzzleState.timeLeft -= 1000 as Milliseconds;
       }
 
       if (gameState.puzzleState?.timeLeft == 0) {
-        appEvents.dispatchEvent(GameEndEvent)
+        appEvents.dispatchEvent(GameEndEvent);
       }
 
-      gameState.playTime += (1000 as Milliseconds)
-    }    
+      gameState.playTime += 1000 as Milliseconds;
+    }
   }, 1000);
-
-  updatePuzzle();
 })
 
 appEvents.addEventListener('gameEnd', () => {
