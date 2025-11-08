@@ -38,6 +38,7 @@ export let gameState = $state({
   gameStatus: "playing" as gameStatus,
   puzzleRuns: 0 as number, 
   playTime: 0 as Milliseconds,
+  totalMovements: 0 as number,
 });
 
 const createWordsFromTitles = (titles: Array<string>) => {
@@ -203,6 +204,7 @@ appEvents.addEventListener("restartGame", () => {
   clearInterval(timeLoop)
   gameState.playTime = 0
   gameState.puzzleRuns = 0
+  gameState.totalMovements = 0
   appEvents.dispatchEvent(GameStartEvent)
 })
 
