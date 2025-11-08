@@ -12,7 +12,7 @@
     }
 </script>
 
-<Dialog bind:shown={shown} dismissable={false} title="crabble!">
+<Dialog bind:shown={shown} dismissable={false} title="🦀 crabble!">
     {#snippet content()}
         <section class="modeSelector-section">
             <h3>Pick a mode</h3>
@@ -58,7 +58,7 @@
         </section>
     {/snippet}
     {#snippet actions()}
-        <Button action={handleGameStart} content="Start!"></Button>
+        <Button action={handleGameStart} content="Start!" primary></Button>
     {/snippet}
 </Dialog>
 
