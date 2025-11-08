@@ -9,8 +9,8 @@
        label: string
     }
 
-    if (primary) {
-        onMount(() => {
+    onMount(() => {
+        if (primary) {
             document.addEventListener('keyup', (event: any) => {
                 let isFocusedInside = element?.contains(document.activeElement)
                 if (!isFocusedInside) {
@@ -34,8 +34,8 @@
                     ((event.target as HTMLElement)?.parentElement?.previousElementSibling?.querySelector("input") as HTMLElement)?.focus()
                 }
             })
-        })
-    }
+        }
+    })
 </script>
 
 <div role="radiogroup" class="picker" bind:this={element}>
