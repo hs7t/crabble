@@ -34,7 +34,7 @@ type GameType = "infinite"|"lightning"|"spooky"
 export let gameState = $state({
   puzzle: undefined as Puzzle|undefined,
   puzzleState: undefined as PuzzleState|undefined,
-  gameType: "infinite" as GameType,
+  gameType: "lightning" as GameType,
   gameStatus: "playing" as gameStatus,
   puzzleRuns: 0 as number
 });
