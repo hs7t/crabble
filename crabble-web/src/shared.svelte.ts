@@ -22,8 +22,7 @@ export type PuzzleState = {
   currentSolution: Array<Series>,
   timeLeft: Milliseconds,
   maxTime: Milliseconds,
-  status: gameStatus, 
-  playTimeElapsed: Milliseconds
+  status: gameStatus 
 }
 
 export type Milliseconds = number
@@ -37,7 +36,8 @@ export let gameState = $state({
   puzzleState: undefined as PuzzleState|undefined,
   gameType: "lightning" as GameType,
   gameStatus: "playing" as gameStatus,
-  puzzleRuns: 0 as number
+  puzzleRuns: 0 as number, 
+  playTime: 0 as Milliseconds,
 });
 
 const createWordsFromTitles = (titles: Array<string>) => {
@@ -112,7 +112,6 @@ export const updatePuzzle = async () => {
     currentSolution: shuffledPuzzleSeries, 
     timeLeft: PUZZLE_TIME_QUANTITY,
     maxTime: PUZZLE_TIME_QUANTITY,
-    playTimeElapsed: 0,
     status: "playing"
   }
 }
@@ -171,6 +170,7 @@ export const shuffle = (array: Array<any>) => {
 export const SeriesCompleteEvent = new Event("seriesComplete")
 export const PuzzleCompleteEvent = new Event("puzzleComplete")
 export const GameStartEvent = new Event("gameStart")
+export const NewGameEvent = new Event("newGame")
 
 let timeLoop: number|undefined
 
@@ -180,12 +180,12 @@ appEvents.addEventListener('gameStart', () => {
       if (gameState.puzzleState.timeLeft >= 1000) {
         gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
       }
-      
+
       if (gameState.puzzleState?.timeLeft == 0) {
         gameState.gameStatus = "lost"
       }
 
-      gameState.puzzleState.playTimeElapsed += (1000 as Milliseconds)
+      gameState.playTime += (1000 as Milliseconds)
     }    
   }, 1000);
 
