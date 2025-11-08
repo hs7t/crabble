@@ -8,9 +8,6 @@
 
 <style>
     .word {
-        --background-color: var(--c-color-accent-A);
-        --color: var(--c-color-accent-A-contrast);
-
         padding: 1ch;
 
         border-radius: 8pt;
