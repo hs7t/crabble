@@ -177,6 +177,8 @@ export const RestartGameEvent = new Event("restartGame")
 let timeLoop: number|undefined
 
 appEvents.addEventListener('gameStart', () => {
+  gameState.gameStatus = "playing";
+  
   timeLoop = setInterval(() => {
     if (gameState.puzzleState) {
       if (gameState.puzzleState.timeLeft >= 1000) {
