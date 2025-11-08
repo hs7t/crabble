@@ -72,8 +72,14 @@
 
 	function handleSort(e: any) {
         if (gameState?.puzzleState && gameState?.puzzle) {
-            gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex] = e.detail.items;
-            gameState.puzzleState.timeLeft = gameState.puzzleState.maxTime;
+            if (
+                gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex]
+                != e.detail.items
+            ) {
+                gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex] = e.detail.items;
+                gameState.puzzleState.timeLeft = gameState.puzzleState.maxTime;
+                gameState.totalMovements += 1;
+            }
 
             if (checkSeriesSolutionValidity(
                 gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex],
