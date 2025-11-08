@@ -14,7 +14,7 @@
 
 <Dialog bind:shown={shown} dismissable={false} title="crabble!">
     {#snippet content()}
-        <section>
+        <section class="modeSelector-section">
             <h3>Pick a mode</h3>
             <Picker 
                 radioName="gameModeRadioSelector"
@@ -35,19 +35,16 @@
                 bind:selectedValue={gameState.gameType}
             ></Picker>
             {#if gameState.gameType == "lightning"}
-                <p><b>In Lightning mode</b>, you'll solve a set of three puzzles.</p>
+                <p>Lightning mode: solve a set of three puzzles.</p>
             {:else if gameState.gameType == "infinite"}
-                <p><b>In Infinite mode</b>, you can solve as many puzzles as you want.</p>
+                <p>Infinite mode: solve as many puzzles as you want.</p>
             {:else if gameState.gameType == "spooky"}
                 <p>
-                    <b>Spooky mode</b> is Lightning mode, but spookier! Solve
-                    a set of three spooky-scary puzzles.
+                    Spooky mode: solve a set of three spooky-scary puzzles.
                 </p>
-
             {/if}
-
         </section>
-        <section>
+        <section class="modeSelector-section">
             <details>
                 <summary>How to play</summary>
                 <ul>
@@ -66,4 +63,9 @@
 </Dialog>
 
 <style>
+    section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 </style>

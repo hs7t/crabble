@@ -96,7 +96,10 @@
     }
 
     dialog section.content {
+        display: flex;
+        flex-direction: column;
         flex-grow: 1;
+        gap: 0.8rem;
         overflow: visible;
         overflow-y: auto;
         min-height: 0;
