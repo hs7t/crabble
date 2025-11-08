@@ -171,7 +171,7 @@ export const SeriesCompleteEvent = new Event("seriesComplete")
 export const PuzzleCompleteEvent = new Event("puzzleComplete")
 export const GameStartEvent = new Event("gameStart")
 export const GameEndEvent = new Event("gameEnd")
-export const NewGameEvent = new Event("newGame")
+export const RestartGameEvent = new Event("restartGame")
 
 let timeLoop: number|undefined
 
