@@ -1,7 +1,7 @@
 <script lang="ts">
     import Button from "./Button.svelte";
 
-    let { content, title = "Dialog", shown = $bindable(), dismissable = true } = $props()
+    let { content, actions = undefined, title = "Dialog", shown = $bindable(), dismissable = true } = $props()
     let dialogReference: HTMLDialogElement
     
     $effect(() => {
@@ -20,7 +20,12 @@
             <Button id="close-button" content="Close" action={() => { shown = false }} />
         {/if}
     </nav>
-    {@render content()}
+    <section class="content">
+        {@render content?.()}
+    </section>
+    <section class="actions">
+        {@render actions?.()}
+    </section>
 </dialog>
 
 <style>
@@ -45,6 +50,7 @@
 
         align-self: center;
         justify-self: center;
+        container-name: dialog;
     }
 
     dialog:focus {
@@ -83,6 +89,20 @@
 
     :global(#close-button) {
         align-self: flex-end;
+    }
+
+    section {
+        width: 100%;
+    }
+
+    dialog section.content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        gap: 0.8rem;
+        overflow: visible;
+        overflow-y: auto;
+        min-height: 0;
     }
 
     dialog:not([open]) {

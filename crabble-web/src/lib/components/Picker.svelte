@@ -65,6 +65,7 @@
     .picker {
         display: flex;
         flex-direction: row;
+        justify-content: center;
         gap: 0.8em;
         padding: 0.4em;
         background-color: var(--c-color-background-B);

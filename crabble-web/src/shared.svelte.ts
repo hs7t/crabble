@@ -149,30 +149,10 @@ export const checkPuzzleSolutionValidity = (puzzleSeries: Array<Series>, solutio
   return true
 }
 
-const isWon = (game: typeof gameState) => {
-  if (game.puzzle?.series == undefined || game.puzzleState?.currentSolution == undefined) {
-    return false
-  }
-
-  return checkPuzzleSolutionValidity(game.puzzle.series, game.puzzleState.currentSolution);
-};
-
 export type gameStatus = "lost" | "won" | "playing";
 
 export const getOverStatus = (game: typeof gameState) => {
-  let status = "playing" as gameStatus;
-
-  if (isWon(game)) {
-    status = "won";
-  } else {
-    if (game.puzzleState?.timeLeft == 0) {
-      status = "lost"
-    } else {
-      status = "playing";
-    }
-  }
-
-  return status;
+  return game.gameStatus
 };
 
 export const shuffle = (array: Array<any>) => {
@@ -189,6 +169,20 @@ export const shuffle = (array: Array<any>) => {
 export const SeriesCompleteEvent = new Event("seriesComplete")
 export const PuzzleCompleteEvent = new Event("puzzleComplete")
 export const GameStartEvent = new Event("gameStart")
+
+let timeLoop: number|undefined
+
+appEvents.addEventListener('gameStart', () => {
+  timeLoop = setInterval(() => {
+    if (
+      gameState.puzzleState?.timeLeft != undefined 
+      && gameState.puzzleState.timeLeft >= 1000
+    ) {
+      gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
+    }
+  }, 1000);
+  updatePuzzle();
+})
 
 appEvents.addEventListener('seriesComplete', () => {
   if (gameState?.puzzleState && gameState?.puzzle?.series) {
@@ -211,18 +205,7 @@ appEvents.addEventListener('puzzleComplete', () => {
       updatePuzzle()
     } else {
       gameState.gameStatus = "won"
+      clearTimeout(timeLoop)
     }
   }
-})
-
-appEvents.addEventListener('gameStart', () => {
-  const timeLeftLoop = setInterval(() => {
-    if (
-      gameState.puzzleState?.timeLeft != undefined 
-      && gameState.puzzleState.timeLeft >= 1000
-    ) {
-      gameState.puzzleState.timeLeft -= (1000 as Milliseconds);
-    }
-  }, 1000);
-  updatePuzzle();
 })
