@@ -15,9 +15,15 @@
         background-color: var(--c-color-background-B);
         color: var(--c-color-primary);
         border: var(--c-border-generic);
+        border-radius: 8pt;
         font-family: var(--c-font-primary);
         transition: all 100ms;
         cursor: pointer;
+    }
+
+    button.primary {
+        color: var(--c-color-accent-A-contrast);
+        background-color: var(--c-color-accent-A);
     }
 
     button:focus {
