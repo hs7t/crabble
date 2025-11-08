@@ -192,6 +192,12 @@ appEvents.addEventListener('gameStart', () => {
   updatePuzzle();
 })
 
+appEvents.addEventListener("restartGame", () => {
+  gameState.playTime = 0
+  gameState.puzzleRuns = 0
+  appEvents.dispatchEvent(GameStartEvent)
+})
+
 appEvents.addEventListener('seriesComplete', () => {
   if (gameState?.puzzleState && gameState?.puzzle?.series) {
     if (gameState.puzzle.series.length > ( gameState.puzzleState.currentSeriesIndex + 1 )) {
