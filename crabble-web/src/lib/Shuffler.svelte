@@ -66,7 +66,7 @@
     
     function handleConsider(e: any) {
         if (gameState?.puzzleState && gameState?.puzzle) {
-            gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex] = e.detail.items;
+            currentSeries = e.detail.items;
         }
     }
 
@@ -83,9 +83,12 @@
         }
 
         if (gameState?.puzzleState && gameState?.puzzle) {
+            let prior = gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex]
+            let current = e.detail.items
+
             if (
-                JSON.stringify(getWordsOnly(gameState.puzzleState.currentSolution[gameState.puzzleState.currentSeriesIndex]))
-                != JSON.stringify(getWordsOnly(e.detail.items))
+                JSON.stringify(getWordsOnly(prior))
+                != JSON.stringify(getWordsOnly(current))
             ) {
                 gameState.puzzleState.timeLeft = gameState.puzzleState.maxTime;
                 gameState.totalMovements += 1;
