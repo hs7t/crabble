@@ -1,9 +1,8 @@
 # Crabble
 
-A fast-paced word game where you unscramble strings of words.
+A fast-paced word game where you unscramble strings of words. [Check it out!](https://crabble.hvii.cc/)
 
-<img width="2194" height="1514" alt="image" src="https://github.com/user-attachments/assets/bc4396cb-2f0d-4dde-82ab-a70f6a2fabbe" />
-
+![A screenshot of the game Crabble](https://i.imgur.com/bxvgflx.png)
 
 > [!NOTE]
 > **Hi, reviewer!** I commit a lot - I apologise in advance. I've tried to take
@@ -32,12 +31,16 @@ A fast-paced word game where you unscramble strings of words.
     -   Moving a word gives you more time.
     -   You'll lose if you run out of time.
 
-## In use
+## Credits
+### In use
 *   [Vite](https://vite.dev/) + [Svelte](https://svelte.dev/)!
 *   [Typescript](https://www.typescriptlang.org/) & [Python](https://www.python.org/)
-*   [svelte-dnd-action](https://github.com/isaacHagoel/svelte-dnd-action)
-*   
+*   [svelte-dnd-action](https://github.com/isaacHagoel/svelte-dnd-action) (give it a star!)
+*   [FastAPI](https://fastapi.tiangolo.com/)
+*   [ky](https://github.com/sindresorhus/ky)
 
-## Credits
-*   u/PizzaTucker's 
-    [neat trick to use an emoji as a favicon](https://www.reddit.com/r/webdev/comments/w8gx24/here_is_a_neat_trick_i_found_to_use_an_emoji_as_a/)
+### More!
+*   [How To Use an Emoji as a Favicon Easily](https://css-tricks.com/emoji-as-a-favicon/) (at CSS-Tricks)
+
+## About
+This project was started for week 4 
