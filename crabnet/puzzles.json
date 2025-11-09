@@ -68,7 +68,11 @@
             "bones",
             "out",
             "the",
-            "basement"
+            "basement",
+            ",",
+            "fill",
+            "the",
+            "buckets"
           ],
           [
             "how",
@@ -82,7 +86,78 @@
             "center",
             "of",
             "a",
-            "bone"
+            "bone",
+            "?"
+          ],
+          [
+            "bones",
+            "!",
+            "now",
+            "available",
+            "inside",
+            "your",
+            "nearest",
+            "vertebrate"
+          ]
+        ]
+      },
+      {
+        "id": "frankestein",
+        "series": [
+          ["so", "strange", "an", "accident", "has", "happened", "to", "us"],
+          [
+            "his",
+            "limbs",
+            "were",
+            "nearly",
+            "frozen",
+            "and",
+            "his",
+            "body",
+            "dreadfully",
+            "emaciated"
+          ],
+          [
+            "I",
+            "was",
+            "soon",
+            "introduced",
+            "into",
+            "the",
+            "presence",
+            "of",
+            "the",
+            "magistrate"
+          ]
+        ],
+        "quotes": [
+          ["well", ",", "sometimes", ",", "dead", "is", "better"],
+          [
+            "we",
+            "all",
+            "float",
+            "down",
+            "here",
+            ",",
+            "and",
+            "you'll",
+            "float",
+            "too",
+            "!"
+          ],
+          [
+            "I'm",
+            "scared",
+            "to",
+            "close",
+            "my",
+            "eyes",
+            ",",
+            "I'm",
+            "scared",
+            "to",
+            "open",
+            "them"
           ]
         ]
       }
