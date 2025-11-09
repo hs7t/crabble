@@ -226,11 +226,11 @@ appEvents.addEventListener('puzzleComplete', () => {
   if (gameState.gameType == "infinite") {
     updatePuzzle()
   } else if (gameState.gameType == "lightning" || gameState.gameType == "spooky") {
-    if (gameState.puzzleRuns > 3) {
-      updatePuzzle()
+    if (gameState.puzzleRuns < 3) {
+      updatePuzzle();
     } else {
-      gameState.gameStatus = "won"
-      clearInterval(timeLoop)
+      gameState.gameStatus = "won";
+      clearInterval(timeLoop);
     }
   }
 })
